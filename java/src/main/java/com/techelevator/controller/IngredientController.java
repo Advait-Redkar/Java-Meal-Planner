@@ -4,13 +4,11 @@ import com.techelevator.dao.IngredientDao;
 import com.techelevator.model.Ingredient;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 @RestController
+@CrossOrigin
 @PreAuthorize("isAuthenticated()")
 public class IngredientController {
     private IngredientDao ingredientDao;

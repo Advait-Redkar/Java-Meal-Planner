@@ -3,6 +3,7 @@
     <h1>Home</h1>
     <p>You must be authenticated to see this</p>
     <router-link v-bind:to="{name:'addRecipe'}">Add Recipe</router-link>
+    <router-link v-bind:to="{name:'addIngredient'}">Add Ingredient</router-link>
   </div>
 </template>
 

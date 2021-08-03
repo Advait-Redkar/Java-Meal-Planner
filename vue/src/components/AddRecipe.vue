@@ -34,9 +34,9 @@ export default {
       recipeService
         .addRecipe(this.newRecipe)
         .then((response) => {
-          if (response.status === 201) {
+          if (response.status === 200) {
             alert("Recipe Succesfully Added");
-            this.$router.push("/home");
+            this.$router.push({ name: 'home' });
           }
         })
         .catch((error) => {
