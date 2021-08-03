@@ -44,7 +44,7 @@ CREATE TABLE ingredients (
 CREATE TABLE recipes_ingredients (
 	ingredient_id int,
 	recipe_id int,
-	CONSTRAINT PK_ingredientp PRIMARY KEY (ingredient_id),
+	/*CONSTRAINT PK_ingredientp PRIMARY KEY (ingredient_id),*/
 	CONSTRAINT FK_ingredientf FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id),
 	CONSTRAINT FK_recipe FOREIGN KEY(recipe_id) REFERENCES recipes(recipe_id)
 );
@@ -52,7 +52,7 @@ CREATE TABLE recipes_ingredients (
 CREATE TABLE users_recipes (
 	user_id int,
 	recipe_id int,
-	CONSTRAINT PK_userp PRIMARY KEY (user_id),
+	/*CONSTRAINT PK_userp PRIMARY KEY (user_id),*/
 	CONSTRAINT FK_userf FOREIGN KEY (user_id) REFERENCES users(user_id),
 	CONSTRAINT FK_recipef FOREIGN KEY(recipe_id) REFERENCES recipes(recipe_id)
 );
