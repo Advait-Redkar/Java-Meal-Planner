@@ -5,6 +5,7 @@
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
+      <div id = "form">
       <label for="username" class="sr-only">Username</label>
       <input
         type="text"
@@ -36,6 +37,7 @@
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
       </button>
+      </div>
     </form>
   </div>
 </template>
@@ -90,4 +92,26 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+#register {
+  display:flex;
+  justify-content: center;
+
+}
+
+.form-register {
+  border: black 3px solid;
+  padding: 10px;
+  border-radius: 10px;
+
+}
+
+
+
+</style>

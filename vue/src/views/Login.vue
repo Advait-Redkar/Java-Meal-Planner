@@ -12,6 +12,7 @@
         role="alert"
         v-if="this.$route.query.registration"
       >Thank you for registering, please sign in.</div>
+      <div id = "form">
       <label for="username" class="sr-only">Username</label>
       <input
         type="text"
@@ -33,6 +34,7 @@
       />
       <router-link :to="{ name: 'register' }">Need an account?</router-link>
       <button type="submit">Sign in</button>
+      </div>
     </form>
   </div>
 </template>
@@ -74,3 +76,27 @@ export default {
   }
 };
 </script>
+
+<style>
+#form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+#login {
+  display:flex;
+  justify-content: center;
+
+}
+
+.form-signin {
+  border: black 3px solid;
+  padding: 10px;
+  border-radius: 10px;
+
+}
+
+
+
+</style>

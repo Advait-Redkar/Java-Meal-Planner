@@ -1,7 +1,7 @@
 <template>
-<div>
-    <h1>Add Ingredient</h1>
+<div id = "add">
     <div>
+          <h1>Add Ingredient</h1>
       <form v-on:submit.prevent>
         Ingredient Name:
         <input type="text" class="form-control" v-model="newIngredient.ingredientName" />
@@ -55,4 +55,22 @@ name: "add-ingredient",
 
 <style>
 
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+#add {
+  display:flex;
+  justify-content: center;
+
+}
+
+form{
+  border: black 3px solid;
+  padding: 10px;
+  border-radius: 10px;
+
+}
 </style>

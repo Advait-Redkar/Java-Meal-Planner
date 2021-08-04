@@ -1,13 +1,12 @@
 <template>
-  <div>
-    <h1>Add Recipe Page</h1>
+  <div id = "add">
     <div>
+      <h1>Add Recipe Page</h1>
       <form v-on:submit.prevent>
         Recipe Name:
         <input type="text" class="form-control" v-model="newRecipe.recipeName" />
         Recipe Description:
-        <input
-          type="text"
+        <textarea
           class="form-control"
           v-model="newRecipe.instructions"
         />
@@ -62,4 +61,23 @@ export default {
   margin-bottom: 10px;
 }
 .btn {margin-bottom: 35px;}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+#add {
+  display:flex;
+  justify-content: center;
+
+}
+
+form{
+  border: black 3px solid;
+  padding: 10px;
+  border-radius: 10px;
+
+}
 </style>
