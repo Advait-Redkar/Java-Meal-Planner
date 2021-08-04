@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Ingredient;
 import com.techelevator.model.Recipe;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.PreferenceChangeEvent;
 
 @Component
 public class JdbcRecipeDao implements RecipeDao{
@@ -22,16 +24,30 @@ public class JdbcRecipeDao implements RecipeDao{
 
     @Override
     public void createRecipe(Recipe newRecipe, Principal principal) {
-    String sql = "INSERT INTO recipes(recipe_name,recipe_instructions) "+
-                 "VALUES(?,?) " +
+    String sql = "INSERT INTO recipes(recipe_name,recipe_instructions,recipe_ingredients,recipe_description) "+
+                 "VALUES(?,?,?,?) " +
             "RETURNING recipe_id;";
+    //model what obj on front end is going to look like
 
-        int recipeId=jdbcTemplate.queryForObject(sql, int.class, newRecipe.getRecipeName(), newRecipe.getInstructions());
+    //drop down on front end to pick from ingredients
+    //select as many as they want, attach them to recipe object sent from front end (array of ingredients)
+    //when you get recipe object on back end, insert recipe, insert into user recipes, take ids of ingredient objects
+    //insert recipe ID and ingredient ID together into linker table
+        int recipeId=jdbcTemplate.queryForObject(sql, int.class, newRecipe.getRecipeName(), newRecipe.getInstructions(), newRecipe.getIngredients(), newRecipe.getDescription());
         sql="INSERT INTO users_recipes(user_id, recipe_id) " +
                 "VALUES(?,?);";
         String currentUserName= principal.getName();
         int currentUserId=userDao.findIdByUsername(currentUserName);
         jdbcTemplate.update(sql,currentUserId,recipeId);
+        
+        for (int i=0; i<newRecipe.getIngredients().size();i++){
+            String sql2="INSERT INTO recipes_ingredients(ingredient_id,recipe_id) " +
+                    "VALUES ";
+            Ingredient ingredient = newRecipe.getIngredients().get(i);
+            String newStr="("+ingredient.getIngredientId()+","+recipeId+")";
+            sql2=sql2+newStr;
+            jdbcTemplate.update(sql2);
+        }
     }
 
     @Override
@@ -50,6 +66,8 @@ public class JdbcRecipeDao implements RecipeDao{
             recipes.add(recipe);
         }
         return recipes;
+
+        //for each statement on each of recipes take ID a
     }
 
     private Recipe mapRowToRecipe(SqlRowSet rs){
@@ -57,6 +75,9 @@ public class JdbcRecipeDao implements RecipeDao{
         recipe.setRecipeId(rs.getInt("recipe_id"));
         recipe.setRecipeName(rs.getString("recipe_name"));
         recipe.setInstructions(rs.getString("recipe_instructions"));
+        //recipe.setIngredients(rs.getObject("recipe_ingredients"));
         return recipe;
     }
+
+    //seperate map method to add to ingredient list in recipe object
 }

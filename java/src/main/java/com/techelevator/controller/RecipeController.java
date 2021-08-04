@@ -30,6 +30,10 @@ public class RecipeController {
     public List<Recipe> recipesList(Principal principal){
         String loggedInUsername= principal.getName();
         int loggedInUserId= userDao.findIdByUsername(loggedInUsername);
-        return recipeDao.getMyRecipes(principal);
+        return recipeDao.getMyRecipes(principal);//store this as a list of recipes
+        //write another DAO method for each over each recipe, passes into DAO method
+        //method will take ID of the recipe, get all ingredients, add them to list
+        //of ingredients on that recipe object.
+        //return the list at the end.
     }
 }
