@@ -35,6 +35,7 @@
 
 <script>
 import recipeService from "@/services/RecipeService";
+import ingredientService from "@/services/IngredientService";
 export default {
   name: "add-recipe",
   data() {
@@ -43,7 +44,9 @@ export default {
         recipeName: "",
         instructions: "",
         description:"",
+        ingredients:{}
       },
+      ingredients:[]
     };
   },
   methods: {
@@ -72,8 +75,14 @@ export default {
     },
   },
   computed: {
-    
+    options: () => this.ingredients,
   },
+  created() {
+    ingredientService.listIngredients().then(response => {
+      this.ingredients = response.data;
+      //this.isLoading = false;
+    });
+  }
 };
 </script>
 
