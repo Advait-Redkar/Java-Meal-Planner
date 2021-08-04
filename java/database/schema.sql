@@ -32,7 +32,6 @@ CREATE TABLE recipes (
 	recipe_id serial,
 	recipe_name varchar(50) NOT NULL,
 	recipe_instructions varchar(1000) NOT NULL,
-	recipe_ingredients varchar(1000) NOT NULL,
 	recipe_description varchar(1000) NOT NULL,
 	CONSTRAINT PK_recipe PRIMARY KEY (recipe_id)
 );

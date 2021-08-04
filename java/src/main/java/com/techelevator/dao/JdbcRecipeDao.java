@@ -24,8 +24,8 @@ public class JdbcRecipeDao implements RecipeDao{
 
     @Override
     public void createRecipe(Recipe newRecipe, Principal principal) {
-    String sql = "INSERT INTO recipes(recipe_name,recipe_instructions,recipe_ingredients,recipe_description) "+
-                 "VALUES(?,?,?,?) " +
+    String sql = "INSERT INTO recipes(recipe_name,recipe_instructions,recipe_description) "+
+                 "VALUES(?,?,?) " +
             "RETURNING recipe_id;";
     //model what obj on front end is going to look like
 
@@ -33,7 +33,7 @@ public class JdbcRecipeDao implements RecipeDao{
     //select as many as they want, attach them to recipe object sent from front end (array of ingredients)
     //when you get recipe object on back end, insert recipe, insert into user recipes, take ids of ingredient objects
     //insert recipe ID and ingredient ID together into linker table
-        int recipeId=jdbcTemplate.queryForObject(sql, int.class, newRecipe.getRecipeName(), newRecipe.getInstructions(), newRecipe.getIngredients(), newRecipe.getDescription());
+        int recipeId=jdbcTemplate.queryForObject(sql, int.class, newRecipe.getRecipeName(), newRecipe.getInstructions(),newRecipe.getDescription());
         sql="INSERT INTO users_recipes(user_id, recipe_id) " +
                 "VALUES(?,?);";
         String currentUserName= principal.getName();
@@ -44,7 +44,8 @@ public class JdbcRecipeDao implements RecipeDao{
             String sql2="INSERT INTO recipes_ingredients(ingredient_id,recipe_id) " +
                     "VALUES ";
             Ingredient ingredient = newRecipe.getIngredients().get(i);
-            String newStr="("+ingredient.getIngredientId()+","+recipeId+")";
+            String ingredientName= ingredient.getIngredientName();
+            String newStr="("+getIngredientIdFromIngredientName(ingredientName)+","+recipeId+")";
             sql2=sql2+newStr;
             jdbcTemplate.update(sql2);
         }
@@ -69,12 +70,29 @@ public class JdbcRecipeDao implements RecipeDao{
 
         //for each statement on each of recipes take ID a
     }
+    private int getIngredientIdFromIngredientName(String name){
+        int ingredientId;
+        String sql="SELECT ingredient_id " +
+                "FROM ingredients " +
+                "WHERE ingredient_name = ?;";
+        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql,name);
+        if(rs.next()){
+            ingredientId = rs.getInt("ingredient_id");
+        }else{
+            String sql2 = "INSERT INTO ingredients(ingredient_name) " +
+                    "VALUES (?) " +
+                    "RETURNING ingredient_id;";
+            ingredientId = jdbcTemplate.queryForObject(sql2,int.class,name);
+        }
 
+        return ingredientId;
+    }
     private Recipe mapRowToRecipe(SqlRowSet rs){
         Recipe recipe = new Recipe();
         recipe.setRecipeId(rs.getInt("recipe_id"));
         recipe.setRecipeName(rs.getString("recipe_name"));
         recipe.setInstructions(rs.getString("recipe_instructions"));
+        recipe.setDescription(rs.getString("recipe_description"));
         //recipe.setIngredients(rs.getObject("recipe_ingredients"));
         return recipe;
     }
