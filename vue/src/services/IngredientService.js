@@ -7,5 +7,8 @@ const http = axios.create({
 export default {
     addIngredient(ingredient){
         return http.post('/createingredient', ingredient)
+    },
+    listIngredients(){
+        return http.get('/ingredients')
     }
 }

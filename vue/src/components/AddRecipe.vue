@@ -5,12 +5,29 @@
       <form v-on:submit.prevent>
         Recipe Name:
         <input type="text" class="form-control" v-model="newRecipe.recipeName" />
-        Recipe Description:
+        Recipe instructions:
         <textarea
           class="form-control"
           v-model="newRecipe.instructions"
         />
+          Recipe Description:
+        <textarea
+          class="form-control"
+          v-model="newRecipe.description"/>
+<!--    selector v-for on the option
+        in data array of ingredients
+        crreated section set array ingredients to result of calling backened 
+  <div class="dropdown">
+        <button class="dropbtn">Dropdown</button>
+        <div class="dropdown-content">
+        <a href="#">Link 1</a>
+        <a href="#">Link 2</a>
+        <a href="#">Link 3</a>
+        </div>
+        </div>-->
+        <button class="dropbtn" >Dropdown</button>
         <button type="submit" class="btn" v-on:click="createRecipe">Add Recipe</button>
+
       </form>
     </div>
   </div>
@@ -25,6 +42,7 @@ export default {
       newRecipe: {
         recipeName: "",
         instructions: "",
+        description:"",
       },
     };
   },
@@ -52,6 +70,9 @@ export default {
           }
         });
     },
+  },
+  computed: {
+    
   },
 };
 </script>

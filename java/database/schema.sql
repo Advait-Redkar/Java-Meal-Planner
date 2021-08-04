@@ -37,9 +37,11 @@ CREATE TABLE recipes (
 );
 
 CREATE TABLE ingredients (
+	user_id int NOT NULL,
 	ingredient_id serial,
 	ingredient_name varchar(50) NOT NULL,
-	CONSTRAINT PK_ingredient PRIMARY KEY (ingredient_id)
+	CONSTRAINT PK_ingredient PRIMARY KEY (ingredient_id),
+	CONSTRAINT FK_user FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE recipes_ingredients (

@@ -71,6 +71,11 @@ const router = new Router({
       meta:{
         requiresAuth: true
       }
+    },
+    {
+    path:"/ingredients",
+    name:"ingredients-list",
+    component: AddRecipeView
     }
   ]
 })

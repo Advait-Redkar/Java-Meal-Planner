@@ -45,7 +45,7 @@ public class JdbcRecipeDao implements RecipeDao{
                     "VALUES ";
             Ingredient ingredient = newRecipe.getIngredients().get(i);
             String ingredientName= ingredient.getIngredientName();
-            String newStr="("+getIngredientIdFromIngredientName(ingredientName)+","+recipeId+")";
+            String newStr="("+getIngredientIdFromIngredientName(ingredientName, currentUserId)+","+recipeId+")";
             sql2=sql2+newStr;
             jdbcTemplate.update(sql2);
         }
@@ -70,19 +70,19 @@ public class JdbcRecipeDao implements RecipeDao{
 
         //for each statement on each of recipes take ID a
     }
-    private int getIngredientIdFromIngredientName(String name){
+    private int getIngredientIdFromIngredientName(String name, int userId){
         int ingredientId;
         String sql="SELECT ingredient_id " +
                 "FROM ingredients " +
-                "WHERE ingredient_name = ?;";
-        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql,name);
+                "WHERE ingredient_name = ? AND user_id = ?;";
+        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql,name, userId);
         if(rs.next()){
             ingredientId = rs.getInt("ingredient_id");
         }else{
-            String sql2 = "INSERT INTO ingredients(ingredient_name) " +
-                    "VALUES (?) " +
+            String sql2 = "INSERT INTO ingredients(ingredient_name, user_id) " +
+                    "VALUES (?,?) " +
                     "RETURNING ingredient_id;";
-            ingredientId = jdbcTemplate.queryForObject(sql2,int.class,name);
+            ingredientId = jdbcTemplate.queryForObject(sql2,int.class,name, userId);
         }
 
         return ingredientId;
