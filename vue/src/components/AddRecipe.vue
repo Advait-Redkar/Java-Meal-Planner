@@ -14,7 +14,7 @@
         <textarea
           class="form-control"
           v-model="newRecipe.description"/>
-          <multiselect v-model="newRecipe.ingredients" :options="ingredients" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="name" label="name" track-by="name" :preselect-first="true" ></multiselect>
+          <multiselect v-model="newRecipe.ingredients" :options="ingredients" label="ingredientName" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Your Ingredient" track-by="ingredientId" @remove="toggleUnSelectIngredient"></multiselect>
 <!--    selector v-for on the option
         in data array of ingredients
         crreated section set array ingredients to result of calling backened 
@@ -26,8 +26,8 @@
         <a href="#">Link 3</a>
         </div>
         </div>
+        v-model="newRecipe.ingredients" :options="ingredients" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="name" label="name" track-by="name" :preselect-first="true" 
         
-        v-bind:key="ingredient" v-model="newRecipe.ingredients" v-for="ingredient in ingredients" :options="ingredient.ingredientName"
         -->
         <!--<button class="dropbtn" >Dropdown</button>-->
         <button type="submit" class="btn" v-on:click="createRecipe">Add Recipe</button>
@@ -79,6 +79,14 @@ export default {
           }
         });
     },
+    toggleUnSelectIngredient(ingredientId){
+      this.newRecipe.ingredients = this.newRecipe.ingredients.filter((ingredient)=>{
+          return ingredient.ingredientId!=ingredientId;
+      })
+
+    }
+
+
   },
   computed: {
     options: () => this.ingredients,
@@ -91,7 +99,7 @@ export default {
   }
 };
 </script>
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style>
 .form-control {
   margin-bottom: 10px;
