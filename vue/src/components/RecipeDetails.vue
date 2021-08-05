@@ -8,7 +8,11 @@
     {{ ingredients.ingredientName }}
   </li>
 </ul>
-
+<router-link v-bind:to="{name: 'editRecipe', params: {recipeId:recipe.recipeId}}">
+<button> 
+Edit Recipe
+</button>
+</router-link>
   </div>
 </template>
 

@@ -9,6 +9,7 @@ import AddRecipeView from '@/views/AddRecipeView'
 import AddIngredientView from '@/views/AddIngredientView'
 import RecipeListView from '@/views/RecipeListView'
 import RecipeDetailsView from '@/views/RecipeDetailsView'
+import EditRecipeView from '@/views/EditRecipeView'
 
 
 Vue.use(Router)
@@ -89,6 +90,11 @@ const router = new Router({
       name: "recipeDetails",
       component: RecipeDetailsView
 
+    },
+    {
+      path:"/recipe/edit/:recipeId",
+      name: "editRecipe",
+      component: EditRecipeView
     }
 
     

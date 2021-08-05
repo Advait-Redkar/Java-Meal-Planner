@@ -15,7 +15,11 @@ export default{
 
     getRecipeDetails(recipeId){
         return http.get(`/recipe/${recipeId}`)
-    }
+    },
+
+    editRecipe(recipeId){
+        return http.put(`/recipe/edit/${recipeId}`)
+    },
 
 
 }

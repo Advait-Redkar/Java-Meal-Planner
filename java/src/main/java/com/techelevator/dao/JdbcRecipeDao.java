@@ -87,6 +87,23 @@ public class JdbcRecipeDao implements RecipeDao{
     }
 
     @Override
+    public void editRecipe(int recipeId, Recipe recipe, Principal principal) {
+        String sql=
+                    "UPDATE recipes " +
+                    "SET recipe_name=?, recipe_instructions=?, recipe_description=? " +
+                    "WHERE recipe_id = ?; ";
+        jdbcTemplate.update(sql,recipe.getRecipeName(),recipe.getInstructions(),recipe.getDescription(),recipeId);
+
+        //from FE send recipe object modeled off of input fields
+        //must pass in whole recipe
+        //modify recipe form component, send that with put to the back end
+        //update statement, update whatever table sent in form
+        //reset all columns from values of object sent
+        //make sure to do WHERE for recipe ID
+        //ingredients----do a delete, reinsert for the ingredients based on the form
+    }
+
+    @Override
     public List<Ingredient> getRecipeIngredients(int recipeId, Principal principal) {
         List<Ingredient> ingredients = new ArrayList<>();
         String sql = "SELECT ingredient_name, user_id, ingredients.ingredient_id " +

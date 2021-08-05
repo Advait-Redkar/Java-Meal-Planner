@@ -44,4 +44,8 @@ public class RecipeController {
         return recipeDao.getRecipeById(recipeId, principal);
 
     }
+    @RequestMapping(value="/recipe/edit/{recipeId}", method = RequestMethod.PUT)
+    public void editRecipe(@PathVariable int recipeId, @RequestBody Recipe recipe, Principal principal){
+        recipeDao.editRecipe(recipeId, recipe, principal);
+    }
 }
