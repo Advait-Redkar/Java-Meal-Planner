@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import AddRecipeView from '@/views/AddRecipeView'
 import AddIngredientView from '@/views/AddIngredientView'
+import RecipeListView from '@/views/RecipeListView'
 
 
 Vue.use(Router)
@@ -76,6 +77,11 @@ const router = new Router({
     path:"/ingredients",
     name:"ingredients-list",
     component: AddRecipeView
+    },
+    {
+      path:"/viewMyRecipes",
+      name:"recipeList",
+      component:RecipeListView
     }
   ]
 })

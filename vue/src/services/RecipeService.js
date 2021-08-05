@@ -8,5 +8,8 @@ export default{
 
     addRecipe(recipe){
         return http.post('/createrecipe',recipe)
+    },
+    listAllRecipes(){
+        return http.get('/recipes')
     }
 }

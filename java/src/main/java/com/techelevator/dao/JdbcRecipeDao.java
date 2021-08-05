@@ -56,7 +56,7 @@ public class JdbcRecipeDao implements RecipeDao{
         List<Recipe>recipes=new ArrayList<>();
         String currentUserName= principal.getName();
         int currentUserId=userDao.findIdByUsername(currentUserName);
-        String sql= "SELECT recipe_name, recipe_instructions, recipes.recipe_id AS recipe_id" +
+        String sql= "SELECT recipe_name, recipe_instructions, recipes.recipe_id AS recipe_id,recipe_description" +
                 " FROM recipes " +
                 "INNER JOIN users_recipes ON users_recipes.recipe_id = recipes.recipe_id " +
                 "INNER JOIN users ON users.user_id = users_recipes.user_id " +

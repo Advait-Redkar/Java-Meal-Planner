@@ -14,6 +14,7 @@
         <textarea
           class="form-control"
           v-model="newRecipe.description"/>
+          <multiselect v-model="newRecipe.ingredients" :options="ingredients" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="name" label="name" track-by="name" :preselect-first="true" ></multiselect>
 <!--    selector v-for on the option
         in data array of ingredients
         crreated section set array ingredients to result of calling backened 
@@ -24,8 +25,11 @@
         <a href="#">Link 2</a>
         <a href="#">Link 3</a>
         </div>
-        </div>-->
-        <button class="dropbtn" >Dropdown</button>
+        </div>
+        
+        v-bind:key="ingredient" v-model="newRecipe.ingredients" v-for="ingredient in ingredients" :options="ingredient.ingredientName"
+        -->
+        <!--<button class="dropbtn" >Dropdown</button>-->
         <button type="submit" class="btn" v-on:click="createRecipe">Add Recipe</button>
 
       </form>
@@ -36,7 +40,9 @@
 <script>
 import recipeService from "@/services/RecipeService";
 import ingredientService from "@/services/IngredientService";
+import Multiselect from 'vue-multiselect';
 export default {
+  components:{Multiselect,},
   name: "add-recipe",
   data() {
     return {
@@ -44,7 +50,7 @@ export default {
         recipeName: "",
         instructions: "",
         description:"",
-        ingredients:{}
+        ingredients:[]
       },
       ingredients:[]
     };
@@ -78,7 +84,7 @@ export default {
     options: () => this.ingredients,
   },
   created() {
-    ingredientService.listIngredients().then(response => {
+    ingredientService.listIngredients().then((response) => {
       this.ingredients = response.data;
       //this.isLoading = false;
     });
