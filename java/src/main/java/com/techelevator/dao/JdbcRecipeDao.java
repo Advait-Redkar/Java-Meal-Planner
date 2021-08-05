@@ -70,6 +70,25 @@ public class JdbcRecipeDao implements RecipeDao{
 
         //for each statement on each of recipes take ID a
     }
+
+    @Override
+    public Recipe getRecipeById(int recipeId, Principal principal) {
+        Recipe recipe = new Recipe();
+        /*String sql = "SELECT recipe_id, recipe_name, recipe_instructions, recipe_description " +
+                "FROM recipes " +
+                "WHERE recipe_id = ?;";*/
+       String sql = "SELECT recipe_name, recipe_instructions, recipe_description, ingredient_name " +
+               "FROM recipes " +
+               "JOIN recipes_ingredients ON recipes_ingredients.recipe_id = recipes.recipe_id " +
+               "JOIN ingredients ON ingredients.ingredient_id = recipes_ingredients.ingredient_id " +
+               "WHERE recipes.recipe_id = ?;";
+        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql, recipeId);
+        if(rs.next()){
+            recipe = mapRowToRecipe(rs);
+        }
+        return recipe;
+    }
+
     private int getIngredientIdFromIngredientName(String name, int userId){
         int ingredientId;
         String sql="SELECT ingredient_id " +
@@ -97,5 +116,15 @@ public class JdbcRecipeDao implements RecipeDao{
         return recipe;
     }
 
+//don't know about this
+    private Recipe mapIngredientsToRecipe(SqlRowSet rs){
+        Recipe recipe = new Recipe();
+        recipe.setRecipeId(rs.getInt("recipe_id"));
+        recipe.setRecipeName(rs.getString("recipe_name"));
+        recipe.setInstructions(rs.getString("recipe_instructions"));
+        recipe.setDescription(rs.getString("recipe_description"));
+        recipe.setIngredients((List<Ingredient>) rs.getObject("ingredient_name"));
+        return recipe;
+    }
     //seperate map method to add to ingredient list in recipe object
 }

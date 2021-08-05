@@ -8,4 +8,5 @@ import java.util.List;
 public interface RecipeDao {
     public void createRecipe(Recipe newRecipe, Principal principal);
     public List<Recipe> getMyRecipes(Principal principal);
+    public Recipe getRecipeById(int recipeId, Principal principal);
 }

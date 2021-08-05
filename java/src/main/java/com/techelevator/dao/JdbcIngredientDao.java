@@ -22,8 +22,8 @@ public class JdbcIngredientDao implements IngredientDao{
     public void createIngredient(Ingredient newIngredient, Principal principal) {
         String currentUserName= principal.getName();
         int currentUserId=userDao.findIdByUsername(currentUserName);
-        String sql = "INSERT INTO ingredients(ingredient_name,user_id)" +
-                     "VALUES(?,?)";
+        String sql = "INSERT INTO ingredients(ingredient_name,user_id) " +
+                     "VALUES(?,?);";
         jdbcTemplate.update(sql, newIngredient.getIngredientName(),currentUserId);
     }
     @Override

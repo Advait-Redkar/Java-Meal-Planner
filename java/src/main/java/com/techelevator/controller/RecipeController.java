@@ -36,4 +36,12 @@ public class RecipeController {
         //of ingredients on that recipe object.
         //return the list at the end.
     }
+
+    @RequestMapping(value = "/recipe/{recipeId}", method = RequestMethod.GET)
+    public Recipe getRecipeById(@PathVariable int recipeId, Principal principal) {
+        String loggedInUsername= principal.getName();
+        int loggedInUserId= userDao.findIdByUsername(loggedInUsername);
+        return recipeDao.getRecipeById(recipeId, principal);
+
+    }
 }

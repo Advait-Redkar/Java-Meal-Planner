@@ -8,6 +8,7 @@ import store from '../store/index'
 import AddRecipeView from '@/views/AddRecipeView'
 import AddIngredientView from '@/views/AddIngredientView'
 import RecipeListView from '@/views/RecipeListView'
+import RecipeDetailsView from '@/views/RecipeDetailsView'
 
 
 Vue.use(Router)
@@ -58,31 +59,39 @@ const router = new Router({
       }
     },
     {
-      path:"/add-recipe",
+      path: "/add-recipe",
       name: "addRecipe",
       component: AddRecipeView,
-      meta:{
+      meta: {
         requiresAuth: true
       }
     },
     {
-      path:"/add-ingredient",
+      path: "/add-ingredient",
       name: "addIngredient",
       component: AddIngredientView,
-      meta:{
+      meta: {
         requiresAuth: true
       }
     },
     {
-    path:"/ingredients",
-    name:"ingredients-list",
-    component: AddRecipeView
+      path: "/ingredients",
+      name: "ingredients-list",
+      component: AddRecipeView
     },
     {
-      path:"/viewMyRecipes",
-      name:"recipeList",
-      component:RecipeListView
+      path: "/viewMyRecipes",
+      name: "recipeList",
+      component: RecipeListView
+    },
+    {
+      path: "/recipe/:recipeId",
+      name: "recipeDetails",
+      component: RecipeDetailsView
+
     }
+
+    
   ]
 })
 

@@ -11,5 +11,11 @@ export default{
     },
     listAllRecipes(){
         return http.get('/recipes')
+    },   
+
+    getRecipeDetails(recipeId){
+        return http.get(`/recipe/${recipeId}`)
     }
+
+
 }
