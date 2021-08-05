@@ -15,21 +15,6 @@
           class="form-control"
           v-model="newRecipe.description"/>
           <multiselect v-model="newRecipe.ingredients" :options="ingredients" label="ingredientName" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Your Ingredient" track-by="ingredientId" @remove="toggleUnSelectIngredient"></multiselect>
-<!--    selector v-for on the option
-        in data array of ingredients
-        crreated section set array ingredients to result of calling backened 
-  <div class="dropdown">
-        <button class="dropbtn">Dropdown</button>
-        <div class="dropdown-content">
-        <a href="#">Link 1</a>
-        <a href="#">Link 2</a>
-        <a href="#">Link 3</a>
-        </div>
-        </div>
-        v-model="newRecipe.ingredients" :options="ingredients" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="name" label="name" track-by="name" :preselect-first="true" 
-        
-        -->
-        <!--<button class="dropbtn" >Dropdown</button>-->
         <button type="submit" class="btn" v-on:click="createRecipe">Add Recipe</button>
 
       </form>

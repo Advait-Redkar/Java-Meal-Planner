@@ -74,20 +74,33 @@ public class JdbcRecipeDao implements RecipeDao{
     @Override
     public Recipe getRecipeById(int recipeId, Principal principal) {
         Recipe recipe = new Recipe();
-        /*String sql = "SELECT recipe_id, recipe_name, recipe_instructions, recipe_description " +
+        String sql = "SELECT recipe_id, recipe_name, recipe_instructions, recipe_description " +
                 "FROM recipes " +
-                "WHERE recipe_id = ?;";*/
-       String sql = "SELECT recipe_name, recipe_instructions, recipe_description, ingredient_name " +
-               "FROM recipes " +
-               "JOIN recipes_ingredients ON recipes_ingredients.recipe_id = recipes.recipe_id " +
-               "JOIN ingredients ON ingredients.ingredient_id = recipes_ingredients.ingredient_id " +
-               "WHERE recipes.recipe_id = ?;";
+                "WHERE recipe_id = ?;";
         SqlRowSet rs = jdbcTemplate.queryForRowSet(sql, recipeId);
         if(rs.next()){
             recipe = mapRowToRecipe(rs);
+            recipe.setIngredients(getRecipeIngredients(recipeId, principal));
         }
+
         return recipe;
     }
+
+    @Override
+    public List<Ingredient> getRecipeIngredients(int recipeId, Principal principal) {
+        List<Ingredient> ingredients = new ArrayList<>();
+        String sql = "SELECT ingredient_name, user_id, ingredients.ingredient_id " +
+                "FROM ingredients " +
+                "JOIN recipes_ingredients ON recipes_ingredients.ingredient_id = ingredients.ingredient_id "+
+                "WHERE recipe_id = ?;";
+        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql, recipeId);
+        while(rs.next()){
+            Ingredient ingredient = mapIngredientsToRecipe(rs);
+            ingredients.add(ingredient);
+        }
+        return ingredients;
+    }
+
 
     private int getIngredientIdFromIngredientName(String name, int userId){
         int ingredientId;
@@ -117,14 +130,13 @@ public class JdbcRecipeDao implements RecipeDao{
     }
 
 //don't know about this
-    private Recipe mapIngredientsToRecipe(SqlRowSet rs){
-        Recipe recipe = new Recipe();
-        recipe.setRecipeId(rs.getInt("recipe_id"));
-        recipe.setRecipeName(rs.getString("recipe_name"));
-        recipe.setInstructions(rs.getString("recipe_instructions"));
-        recipe.setDescription(rs.getString("recipe_description"));
-        recipe.setIngredients((List<Ingredient>) rs.getObject("ingredient_name"));
-        return recipe;
+
+    private Ingredient mapIngredientsToRecipe(SqlRowSet rs){
+        Ingredient ingredient = new Ingredient();
+        ingredient.setUserId(rs.getInt("user_id"));
+        ingredient.setIngredientId(rs.getInt("ingredient_id"));
+        ingredient.setIngredientName(rs.getString("ingredient_name"));
+        return ingredient;
     }
     //seperate map method to add to ingredient list in recipe object
 }
