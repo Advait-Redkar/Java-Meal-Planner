@@ -8,7 +8,7 @@
     {{ ingredients.ingredientName }}
   </li>
 </ul>
-<router-link v-bind:to="{name: 'editRecipe', params: {recipeId:recipe.recipeId}}">
+<router-link v-bind:to="{name: 'editRecipe', params: {recipeId: recipe.recipeId}}">
 <button> 
 Edit Recipe
 </button>
@@ -19,7 +19,7 @@ Edit Recipe
 <script>
 
 export default {
-    name:"recipe-list",
+    name:"recipe-details",
     props: {
         recipe: Object
     }

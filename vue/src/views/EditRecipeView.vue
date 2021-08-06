@@ -1,6 +1,7 @@
 <template>
   <div>
-      <edit-recipe></edit-recipe>
+      <edit-recipe v-bind:recipeId="parseInt($route.params.recipeId)">
+      </edit-recipe>
   </div>
 </template>
 

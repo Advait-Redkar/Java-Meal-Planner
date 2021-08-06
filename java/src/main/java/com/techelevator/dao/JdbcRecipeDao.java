@@ -94,6 +94,26 @@ public class JdbcRecipeDao implements RecipeDao{
                     "WHERE recipe_id = ?; ";
         jdbcTemplate.update(sql,recipe.getRecipeName(),recipe.getInstructions(),recipe.getDescription(),recipeId);
 
+        sql = "DELETE FROM recipes_ingredients " +
+                "WHERE recipe_id = ?;";
+        jdbcTemplate.update(sql, recipeId);
+
+        String currentUserName= principal.getName();
+        int currentUserId=userDao.findIdByUsername(currentUserName);
+
+        for (int i=0; i<recipe.getIngredients().size();i++){
+            String sql2="INSERT INTO recipes_ingredients(ingredient_id,recipe_id) " +
+                    "VALUES ";
+            Ingredient ingredient = recipe.getIngredients().get(i);
+            String ingredientName= ingredient.getIngredientName();
+            String newStr="("+getIngredientIdFromIngredientName(ingredientName, currentUserId)+","+recipeId+")";
+            sql2=sql2+newStr;
+            jdbcTemplate.update(sql2);
+        }
+
+
+
+
         //from FE send recipe object modeled off of input fields
         //must pass in whole recipe
         //modify recipe form component, send that with put to the back end

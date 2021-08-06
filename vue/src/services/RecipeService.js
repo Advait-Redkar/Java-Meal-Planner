@@ -17,8 +17,8 @@ export default{
         return http.get(`/recipe/${recipeId}`)
     },
 
-    editRecipe(recipeId){
-        return http.put(`/recipe/edit/${recipeId}`)
+    editRecipe(recipeId, recipe){
+        return http.put(`/recipe/edit/${recipeId}`, recipe)
     },
 
 

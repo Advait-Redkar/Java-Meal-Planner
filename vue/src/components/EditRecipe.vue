@@ -21,7 +21,6 @@
 
 <script>
 import recipeService from "@/services/RecipeService";
-import ingredientService from "@/services/IngredientService";
 // import Multiselect from 'vue-multiselect';
 export default {
 // components:{Multiselect,},
@@ -50,13 +49,14 @@ export default {
     },
    
     updateRecipe() {
-        let newRecipe ={};
-        newRecipe.id= this.recipeId,
-        newRecipe.recipeName= this.recipeName,
-        newRecipe.description= this.description,
-        newRecipe.instructions= this.instructions,
+        const recipe ={
+        id: this.$route.params.recipeId,
+        recipeName: this.newRecipe.recipeName,
+        description: this.newRecipe.description,
+        instructions: this.newRecipe.instructions,
+        };
       
-       recipeService.editRecipe(this.$route.params.recipeId)
+       recipeService.editRecipe(this.$route.params.recipeId, recipe)
         .then (response=>{
             if(response.status===200){
             this.$router.push({name: 'recipeDetails'});
@@ -82,10 +82,13 @@ export default {
     options: () => this.ingredients,
   },
   created() {
-    ingredientService.listIngredients().then((response) => {
-      this.ingredients = response.data;
-      //this.isLoading = false;
+    recipeService.getRecipeDetails(this.recipeId)
+    .then((response) => {
+      this.newRecipe.recipeName = response.data.recipeName;
+      this.newRecipe.instructions = response.data.instructions;
+      this.newRecipe.description = response.data.description;
     });
+  
   }
 };
 </script>
