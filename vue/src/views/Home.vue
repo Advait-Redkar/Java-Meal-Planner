@@ -7,6 +7,8 @@
     <router-link v-bind:to="{name:'addIngredient'}">Add Ingredient</router-link> &nbsp;|&nbsp;
     <router-link v-bind:to="{name:'recipeList'}">View my recipes</router-link> &nbsp;|&nbsp;
     <router-link v-bind:to="{name:'createMealPlan'}">Add Meal Plan</router-link> &nbsp;|&nbsp;
+    <router-link v-bind:to="{name:'mealPlans'}">View Meal Plans</router-link> &nbsp;|&nbsp;
+
     </div>
   </div>
 </template>

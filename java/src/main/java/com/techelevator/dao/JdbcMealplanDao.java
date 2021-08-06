@@ -7,6 +7,9 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class JdbcMealplanDao implements MealplanDao{
     private final JdbcTemplate jdbcTemplate;
@@ -33,6 +36,23 @@ public class JdbcMealplanDao implements MealplanDao{
         }
 
     }
+
+    @Override
+    public List<Mealplan> getAllMealPlans(Principal principal) {
+        List<Mealplan>mealplans=new ArrayList<>();
+        String currentUserName= principal.getName();
+        int currentUserId=userDao.findIdByUsername(currentUserName);
+        String sql="SELECT user_id, mealplan_id, mealplan_name, mealplan_time, mealplan_day " +
+                "FROM mealplan " +
+                "WHERE user_id=?;";
+        SqlRowSet results= jdbcTemplate.queryForRowSet(sql,currentUserId);
+        while(results.next()){
+            Mealplan mealplan=mapRowToMealPlan(results);
+            mealplans.add(mealplan);
+        }
+        return mealplans;
+    }
+
     private int getRecipeIdFromRecipeName(String name, int userId){
         int recipeId;
         String sql="SELECT recipes.recipe_id " +
@@ -55,4 +75,15 @@ public class JdbcMealplanDao implements MealplanDao{
         return recipeId;
 
     }
+    private Mealplan mapRowToMealPlan(SqlRowSet rs){
+        Mealplan mealplan = new Mealplan();
+        mealplan.setMealplanId(rs.getInt("mealplan_id"));
+        mealplan.setMealplanName(rs.getString("mealplan_name"));
+        mealplan.setMealplanTime(rs.getString("mealplan_time"));
+        mealplan.setMealplanDay(rs.getInt("mealplan_day"));
+        mealplan.setUserId(rs.getInt("user_id"));
+        //recipe.setIngredients(rs.getObject("recipe_ingredients"));
+        return mealplan;
+    }
+
 }
