@@ -12,7 +12,7 @@
         <textarea
           class="form-control"
           v-model="newRecipe.description"/>
-          <!-- <multiselect v-model="newRecipe.ingredients" :options="ingredients" label="ingredientName" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Your Ingredient" track-by="ingredientId" @remove="toggleUnSelectIngredient"></multiselect> -->
+          <multiselect v-model="newRecipe.ingredients" :options="ingredients" label="ingredientName" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Your Ingredient" track-by="ingredientId" @remove="toggleUnSelectIngredient"></multiselect>
         <button type="submit" class="btn" v-on:click="updateRecipe()">Update Recipe</button>
 
       </form>
@@ -21,9 +21,10 @@
 
 <script>
 import recipeService from "@/services/RecipeService";
-// import Multiselect from 'vue-multiselect';
+import ingredientService from "@/services/IngredientService";
+import Multiselect from 'vue-multiselect';
 export default {
-// components:{Multiselect,},
+ components:{Multiselect,},
   name: "edit-recipe",
   props: [
       "recipeId"
@@ -34,9 +35,9 @@ export default {
         recipeName: "",
         instructions: "",
         description:"",
-        // ingredients:[]
+         ingredients:[]
       },
-    //   ingredients:[]
+       ingredients:[]
     };
   },
   methods: {
@@ -54,6 +55,7 @@ export default {
         recipeName: this.newRecipe.recipeName,
         description: this.newRecipe.description,
         instructions: this.newRecipe.instructions,
+        ingredients: this.newRecipe.ingredients
         };
       
        recipeService.editRecipe(this.$route.params.recipeId, recipe)
@@ -87,6 +89,10 @@ export default {
       this.newRecipe.recipeName = response.data.recipeName;
       this.newRecipe.instructions = response.data.instructions;
       this.newRecipe.description = response.data.description;
+    }),    
+    ingredientService.listIngredients().then((response) => {
+      this.ingredients = response.data;
+      //this.isLoading = false;
     });
   
   }

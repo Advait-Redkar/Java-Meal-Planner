@@ -1,22 +1,33 @@
 <template>
-  <div id = "add">
+  <div id="add">
     <div>
       <h1>Add Recipe Page</h1>
       <form v-on:submit.prevent>
         Recipe Name:
-        <input type="text" class="form-control" v-model="newRecipe.recipeName" />
-        Recipe instructions:
-        <textarea
+        <input
+          type="text"
           class="form-control"
-          v-model="newRecipe.instructions"
+          v-model="newRecipe.recipeName"
         />
-          Recipe Description:
-        <textarea
-          class="form-control"
-          v-model="newRecipe.description"/>
-          <multiselect v-model="newRecipe.ingredients" :options="ingredients" label="ingredientName" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Your Ingredient" track-by="ingredientId" @remove="toggleUnSelectIngredient"></multiselect>
-        <button type="submit" class="btn" v-on:click="createRecipe">Add Recipe</button>
-
+        Recipe instructions:
+        <textarea class="form-control" v-model="newRecipe.instructions" />
+        Recipe Description:
+        <textarea class="form-control" v-model="newRecipe.description" />
+        <multiselect
+          v-model="newRecipe.ingredients"
+          :options="ingredients"
+          label="ingredientName"
+          :multiple="true"
+          :close-on-select="false"
+          :clear-on-select="false"
+          :preserve-search="true"
+          placeholder="Select Your Ingredient"
+          track-by="ingredientId"
+          @remove="toggleUnSelectIngredient"
+        ></multiselect>
+        <button type="submit" class="btn" v-on:click="createRecipe">
+          Add Recipe
+        </button>
       </form>
     </div>
   </div>
@@ -25,19 +36,19 @@
 <script>
 import recipeService from "@/services/RecipeService";
 import ingredientService from "@/services/IngredientService";
-import Multiselect from 'vue-multiselect';
+import Multiselect from "vue-multiselect";
 export default {
-  components:{Multiselect,},
+  components: { Multiselect },
   name: "add-recipe",
   data() {
     return {
       newRecipe: {
         recipeName: "",
         instructions: "",
-        description:"",
-        ingredients:[]
+        description: "",
+        ingredients: [],
       },
-      ingredients:[]
+      ingredients: [],
     };
   },
   methods: {
@@ -47,7 +58,7 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             alert("Recipe Succesfully Added");
-            this.$router.push({ name: 'home' });
+            this.$router.push({ name: "home" });
           }
         })
         .catch((error) => {
@@ -59,19 +70,17 @@ export default {
           } else if (error.request) {
             this.errorMsg = "Error adding recipe. Server could not be reached.";
           } else {
-            this.errorMsg =
-              "Error adding card. Request could not be created.";
+            this.errorMsg = "Error adding card. Request could not be created.";
           }
         });
     },
-    toggleUnSelectIngredient(ingredientId){
-      this.newRecipe.ingredients = this.newRecipe.ingredients.filter((ingredient)=>{
-          return ingredient.ingredientId!=ingredientId;
-      })
-
-    }
-
-
+    toggleUnSelectIngredient(ingredientId) {
+      this.newRecipe.ingredients = this.newRecipe.ingredients.filter(
+        (ingredient) => {
+          return ingredient.ingredientId != ingredientId;
+        }
+      );
+    },
   },
   computed: {
     options: () => this.ingredients,
@@ -81,7 +90,7 @@ export default {
       this.ingredients = response.data;
       //this.isLoading = false;
     });
-  }
+  },
 };
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
@@ -89,7 +98,9 @@ export default {
 .form-control {
   margin-bottom: 10px;
 }
-.btn {margin-bottom: 35px;}
+.btn {
+  margin-bottom: 35px;
+}
 
 form {
   display: flex;
@@ -98,15 +109,13 @@ form {
 }
 
 #add {
-  display:flex;
+  display: flex;
   justify-content: center;
-
 }
 
-form{
+form {
   border: black 3px solid;
   padding: 10px;
   border-radius: 10px;
-
 }
 </style>

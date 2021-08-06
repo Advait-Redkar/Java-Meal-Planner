@@ -1,15 +1,17 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users;
-DROP SEQUENCE IF EXISTS seq_user_id;
-DROP TABLE IF EXISTS recipes;
+
+
+/*DROP TABLE IF EXISTS recipes;
 DROP TABLE IF EXISTS ingredients;
+DROP TABLE IF EXISTS mealplan;
 DROP TABLE IF EXISTS recipes_ingredients;
 DROP TABLE IF EXISTS users_recipes;
-
-
-
-
+DROP TABLE IF EXISTS mealplan_recipes;
+DROP TABLE IF EXISTS users;
+*/
+DROP TABLE IF EXISTS users, recipes, ingredients, mealplan, recipes_ingredients, users_recipes, mealplan_recipes CASCADE;
+DROP SEQUENCE IF EXISTS seq_user_id;
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
   NO MAXVALUE
@@ -44,6 +46,24 @@ CREATE TABLE ingredients (
 	CONSTRAINT FK_user FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
+
+CREATE TABLE mealplan (
+	user_id int,
+	mealplan_id serial,
+	mealplan_name varchar(50) NOT NULL,
+	mealplan_time varchar(50) NOT NULL,
+	mealplan_day int,
+	CONSTRAINT PK_mealplan PRIMARY KEY(mealplan_id),
+	CONSTRAINT FK_usermp FOREIGN KEY(user_id) REFERENCES users(user_id),
+	CONSTRAINT CHK_mealplan_day CHECK (mealplan_day<=7)
+);
+CREATE TABLE mealplan_recipes(
+mealplan_id int,
+recipe_id int,
+CONSTRAINT FK_mealplan FOREIGN KEY(mealplan_id) REFERENCES mealplan(mealplan_id),
+CONSTRAINT FK_recipemr FOREIGN KEY(recipe_id) REFERENCES recipes(recipe_id)
+);
+
 CREATE TABLE recipes_ingredients (
 	ingredient_id int,
 	recipe_id int,
@@ -59,7 +79,6 @@ CREATE TABLE users_recipes (
 	CONSTRAINT FK_userf FOREIGN KEY (user_id) REFERENCES users(user_id),
 	CONSTRAINT FK_recipef FOREIGN KEY(recipe_id) REFERENCES recipes(recipe_id)
 );
-
 
 
 COMMIT TRANSACTION;
