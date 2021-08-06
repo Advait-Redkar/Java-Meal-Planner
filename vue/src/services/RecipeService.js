@@ -1,24 +1,21 @@
 import axios from "axios";
 
-const http = axios.create({
-    baseURL: "http://localhost:8080"
-});
 
 export default{
 
     addRecipe(recipe){
-        return http.post('/createrecipe',recipe)
+        return axios.post('/createrecipe',recipe)
     },
     listAllRecipes(){
-        return http.get('/recipes')
+        return axios.get('/recipes')
     },   
 
     getRecipeDetails(recipeId){
-        return http.get(`/recipe/${recipeId}`)
+        return axios.get(`/recipe/${recipeId}`)
     },
 
     editRecipe(recipeId, recipe){
-        return http.put(`/recipe/edit/${recipeId}`, recipe)
+        return axios.put(`/recipe/edit/${recipeId}`, recipe)
     },
 
 

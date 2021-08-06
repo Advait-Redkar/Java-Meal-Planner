@@ -5,7 +5,8 @@
     <div id = "nav">
     <router-link v-bind:to="{name:'addRecipe'}">Add Recipe</router-link> &nbsp;|&nbsp;
     <router-link v-bind:to="{name:'addIngredient'}">Add Ingredient</router-link> &nbsp;|&nbsp;
-    <router-link v-bind:to="{name:'recipeList'}">View my recipes</router-link>
+    <router-link v-bind:to="{name:'recipeList'}">View my recipes</router-link> &nbsp;|&nbsp;
+    <router-link v-bind:to="{name:'createMealPlan'}">Add Meal Plan</router-link> &nbsp;|&nbsp;
     </div>
   </div>
 </template>

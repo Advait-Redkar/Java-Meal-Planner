@@ -10,6 +10,7 @@ import AddIngredientView from '@/views/AddIngredientView'
 import RecipeListView from '@/views/RecipeListView'
 import RecipeDetailsView from '@/views/RecipeDetailsView'
 import EditRecipeView from '@/views/EditRecipeView'
+import CreateMealPlanView from '@/views/CreateMealPlanView'
 
 
 Vue.use(Router)
@@ -95,7 +96,13 @@ const router = new Router({
       path:"/recipe/edit/:recipeId",
       name: "editRecipe",
       component: EditRecipeView
+    },
+    {
+      path:"/createmealplan",
+      name: "createMealPlan",
+      component: CreateMealPlanView
     }
+    
 
     
   ]
