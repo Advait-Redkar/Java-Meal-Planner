@@ -9,27 +9,29 @@ public class Mealplan {
     private String mealplanName;
     private String mealplanTime;
     private int mealplanDay;
-    private List<Recipe> recipeList;
 
-    public Mealplan(int userId, int mealplanId, String mealplanName, String mealplanTime, int mealplanDay, List<Recipe> recipeList) {
+
+    private List<Meal> mealList;
+
+    public Mealplan(int userId, int mealplanId, String mealplanName, String mealplanTime, int mealplanDay, List<Meal> mealList) {
         this.userId = userId;
         this.mealplanId = mealplanId;
         this.mealplanName = mealplanName;
         this.mealplanTime = mealplanTime;
         this.mealplanDay = mealplanDay;
-        this.recipeList = recipeList;
+        this.mealList = mealList;
     }
 
     public Mealplan() {
 
     }
 
-    public List<Recipe> getRecipeList() {
-        return recipeList;
+    public List<Meal> getMealList() {
+        return mealList;
     }
 
-    public void setRecipeList(List<Recipe> recipeList) {
-        this.recipeList = recipeList;
+    public void setMealList(List<Meal> mealList) {
+        this.mealList = mealList;
     }
 
     public int getUserId() {

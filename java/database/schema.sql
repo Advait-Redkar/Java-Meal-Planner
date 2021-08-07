@@ -7,10 +7,10 @@ DROP TABLE IF EXISTS ingredients;
 DROP TABLE IF EXISTS mealplan;
 DROP TABLE IF EXISTS recipes_ingredients;
 DROP TABLE IF EXISTS users_recipes;
-DROP TABLE IF EXISTS mealplan_recipes;
+DROP TABLE IF EXISTS meals_recipes;
 DROP TABLE IF EXISTS users;
 */
-DROP TABLE IF EXISTS users, recipes, ingredients, meals, mealplan, mealplan_meal, recipes_ingredients, users_recipes, mealplan_recipes CASCADE;
+DROP TABLE IF EXISTS users, recipes, ingredients, meals, mealplan, mealplan_meal, recipes_ingredients, users_recipes, meals_recipes CASCADE;
 DROP SEQUENCE IF EXISTS seq_user_id;
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
@@ -52,7 +52,9 @@ CREATE TABLE meals (
 	meal_name varchar(50) NOT NULL,
 	meal_type int NOT NULL,
 	CONSTRAINT PK_meal PRIMARY KEY (meal_id),
-	CONSTRAINT FK_usermeal FOREIGN KEY (user_id) REFERENCES users(user_id)
+	CONSTRAINT FK_usermeal FOREIGN KEY (user_id) REFERENCES users(user_id),
+	CONSTRAINT UQ_meal_name UNIQUE(meal_name),
+	CONSTRAINT CHK_meal_type CHECK(meal_type<=4)
 
 );
 
@@ -75,10 +77,10 @@ CREATE TABLE mealplan_meal (
 	CONSTRAINT FK_meal FOREIGN KEY(meal_id) REFERENCES meals(meal_id)
 );
 
-CREATE TABLE mealplan_recipes(
-mealplan_id int,
+CREATE TABLE meals_recipes(
+meal_id int,
 recipe_id int,
-CONSTRAINT FK_mealplan FOREIGN KEY(mealplan_id) REFERENCES mealplan(mealplan_id),
+CONSTRAINT FK_mealm FOREIGN KEY(meal_id) REFERENCES meals(meal_id),
 CONSTRAINT FK_recipemr FOREIGN KEY(recipe_id) REFERENCES recipes(recipe_id)
 );
 

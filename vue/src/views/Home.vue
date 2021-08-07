@@ -8,6 +8,10 @@
     <router-link v-bind:to="{name:'recipeList'}">View my recipes</router-link> &nbsp;|&nbsp;
     <router-link v-bind:to="{name:'createMealPlan'}">Add Meal Plan</router-link> &nbsp;|&nbsp;
     <router-link v-bind:to="{name:'mealPlans'}">View Meal Plans</router-link> &nbsp;|&nbsp;
+    <router-link v-bind:to="{name:'createmeal'}">Add Meal</router-link> &nbsp;|&nbsp;
+    <router-link v-bind:to="{name:'meals'}">View Meals</router-link> &nbsp;|&nbsp;
+
+
 
     </div>
   </div>

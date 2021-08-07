@@ -10,10 +10,7 @@
           class="form-control"
           v-model="newMealPlan.mealplanName"
         />
-        Type of Meal:
-        <textarea class="form-control" v-model="newMealPlan.mealplanTime" />
         
-
         Day of Week:
         <input type="radio" id= 1  name="day_of_week" value= 1 v-model="newMealPlan.mealplanDay" />
         <label for= 1>Monday</label><br />
@@ -31,16 +28,16 @@
         <label for= 7>Sunday</label><br />
         
         <multiselect
-          v-model="newMealPlan.recipeList"
-          :options="recipeList"
-          label="recipeName"
+          v-model="newMealPlan.mealList"
+          :options="mealList"
+          label="mealName"
           :multiple="true"
           :close-on-select="false"
           :clear-on-select="false"
           :preserve-search="true"
-          placeholder="Select Your Recipe"
-          track-by="recipeId"
-          @remove="toggleUnSelectRecipe"
+          placeholder="Select Your Meal"
+          track-by="mealId"
+          @remove="toggleUnSelectMeal"
         ></multiselect>
         <button type="submit" class="btn" v-on:click="createMealPlan">
           Add Meal Plan
@@ -51,7 +48,7 @@
 </template>
 
 <script>
-import recipeService from "@/services/RecipeService";
+import MealService from "@/services/MealService";
 import mealPlanService from "@/services/mealPlanService";
 import Multiselect from "vue-multiselect";
 export default {
@@ -63,9 +60,9 @@ export default {
         mealplanName: "",
         mealplanTime: "",
         mealplanDay: null,
-        recipeList: [],
+        mealList: [],
       },
-      recipeList: [],
+      mealList: [],
     };
   },
   methods: {
@@ -93,18 +90,18 @@ export default {
           }
         });
     },
-    toggleUnSelectRecipe(recipeId) {
-      this.newMealPlan.recipes = this.newMealPlan.recipeList.filter((recipe) => {
-        return recipe.recipeId != recipeId;
+    toggleUnSelectRecipe(mealId) {
+      this.newMealPlan.meals = this.newMealPlan.mealList.filter((meal) => {
+        return meal.mealId != mealId;
       });
     },
   },
   computed: {
-    options: () => this.recipeList,
+    options: () => this.mealList,
   },
   created() {
-    recipeService.listAllRecipes().then((response) => {
-      this.recipeList = response.data;
+    MealService.viewMeals().then((response) => {
+      this.mealList = response.data;
       //this.isLoading = false;
     });
   },
