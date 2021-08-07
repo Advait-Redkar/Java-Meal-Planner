@@ -1,8 +1,6 @@
 <template>
     <div id="add">
-    <h1>Meal Name</h1>
     <div>
-      <h1>Create Meal</h1>
       <form v-on:submit.prevent>
         Meal Plan Name:
         <input

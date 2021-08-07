@@ -1,7 +1,6 @@
 <template>
 <div id = "add">
     <div>
-          <h1>Add Ingredient</h1>
       <form v-on:submit.prevent>
         Ingredient Name:
         <input type="text" class="form-control" v-model="newIngredient.ingredientName" />

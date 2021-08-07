@@ -1,7 +1,6 @@
 <template>
   <div id="add">
     <div>
-      <h1>Add Recipe Page</h1>
       <form v-on:submit.prevent>
         Recipe Name:
         <input
