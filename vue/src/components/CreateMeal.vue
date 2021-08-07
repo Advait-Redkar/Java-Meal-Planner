@@ -1,8 +1,8 @@
 <template>
     <div id="add">
     <div>
-      <form v-on:submit.prevent>
-        Meal Plan Name:
+      <form>
+        Meal Name:
         <input
           type="text"
           class="form-control"

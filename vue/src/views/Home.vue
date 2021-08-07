@@ -24,7 +24,7 @@
         <div class="divitems"><add-ingredient></add-ingredient></div>
       </div>
       <div class="flex-item bordered flex-container">
-        <div class="divitems"><h1>Ingredients</h1></div>
+        <div class="divitems"><h1>Create a Recipe</h1></div>
         <div class="divitems"><add-recipe></add-recipe></div>
         <div>
           <router-link v-bind:to="{ name: 'recipeList' }"
@@ -33,14 +33,14 @@
         </div>
       </div>
       <div class="flex-item bordered flex-container">
-        <div class="divitems"><h1>Ingredients</h1></div>
+        <div class="divitems"><h1>Create a Meal</h1></div>
         <div class="divitems"><create-meal></create-meal></div>
         <div>
           <router-link v-bind:to="{ name: 'meals' }">View Meals</router-link>
         </div>
       </div>
       <div class="flex-item bordered flex-container">
-        <div class="divitems"><h1>Ingredients</h1></div>
+        <div class="divitems"><h1>Create a Meal Plan</h1></div>
         <div class="divitems"><create-meal-plan></create-meal-plan></div>
         <div>
           <router-link v-bind:to="{ name: 'mealPlans' }"

@@ -1,7 +1,7 @@
 <template>
   <div id="add">
     <div>
-      <form v-on:submit.prevent>
+      <form>
         Recipe Name:
         <input
           type="text"

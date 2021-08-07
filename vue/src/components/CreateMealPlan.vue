@@ -1,7 +1,7 @@
 <template>
   <div id="add">
     <div>
-      <form v-on:submit.prevent>
+      <form>
         Meal Plan Name:
         <input
           type="text"
@@ -24,6 +24,7 @@
         <label for= 6>Saturday</label><br />
         <input type="radio" id= 7  name="day_of_week" value= 7 v-model="newMealPlan.mealplanDay" />
         <label for= 7>Sunday</label><br />
+        
         
         <multiselect
           v-model="newMealPlan.mealList"
