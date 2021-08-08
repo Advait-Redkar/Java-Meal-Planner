@@ -24,9 +24,11 @@
           track-by="ingredientId"
           @remove="toggleUnSelectIngredient"
         ></multiselect>
+        <div class="submit-btn">
         <button type="submit" class="btn" v-on:click="createRecipe">
           Add Recipe
         </button>
+        </div>
       </form>
     </div>
   </div>
@@ -98,9 +100,27 @@ export default {
   margin-bottom: 10px;
 }
 .btn {
-  margin-bottom: 35px;
-}
+  margin:0 0 10px;
+display:inline-block;
+padding:0.5em 3em;
+border:0.16em solid #F38630;
+margin:0 0.3em 0.3em 0;
+box-sizing: border-box;
+text-decoration:none;
+text-transform:uppercase;
+font-family:'Roboto',sans-serif;
+font-weight:400;
+background-color:white;
+text-align:center;
+transition: all 0.15s;
+color:black;
 
+}
+.btn:hover{
+  color:black;
+border-color:black;
+background-color: whitesmoke;
+}
 form {
   display: flex;
   flex-direction: column;
@@ -113,8 +133,11 @@ form {
 }
 
 form {
-  border: black 3px solid;
+  border: #FA6900 2px solid;
   padding: 10px;
   border-radius: 10px;
+}
+.submit-btn{
+  margin: 10px 0 0 0;
 }
 </style>

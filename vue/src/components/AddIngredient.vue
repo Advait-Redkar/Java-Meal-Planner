@@ -1,7 +1,7 @@
 <template>
 <div id = "add">
     <div>
-      <form v-on:submit.prevent>
+      <form>
         Ingredient Name:
         <input type="text" class="form-control" v-model="newIngredient.ingredientName" />
         <button type="submit" class="btn" v-on:click="createIngredient">Add Ingredient</button>
@@ -22,6 +22,7 @@ name: "add-ingredient",
       newIngredient: {
         ingredientName: "",
       },
+      
     };
   },
    methods: {

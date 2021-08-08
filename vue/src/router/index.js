@@ -82,44 +82,68 @@ const router = new Router({
     {
       path: "/ingredients",
       name: "ingredients-list",
-      component: AddRecipeView
+      component: AddRecipeView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/viewMyRecipes",
       name: "recipeList",
-      component: RecipeListView
+      component: RecipeListView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/recipe/:recipeId",
       name: "recipeDetails",
-      component: RecipeDetailsView
+      component: RecipeDetailsView,
+      meta: {
+        requiresAuth: true
+      }
 
     },
     {
       path:"/recipe/edit/:recipeId",
       name: "editRecipe",
-      component: EditRecipeView
+      component: EditRecipeView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path:"/createmealplan",
       name: "createMealPlan",
-      component: CreateMealPlanView
+      component: CreateMealPlanView,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path:"/mealplans",
       name:"mealPlans",
-      component: MealPlanListView
+      component: MealPlanListView,
+      meta: {
+        requiresAuth: true
+      }
     },
   {
     path:"/createmeal",
     name:"createmeal",
-    component: CreateMealView
+    component: CreateMealView,
+    meta: {
+      requiresAuth: true
+    }
 
   },
   {
     path:"/meals",
     name:"meals",
-    component: MealListView
+    component: MealListView,
+    meta: {
+      requiresAuth: true
+    }
   }
 
     

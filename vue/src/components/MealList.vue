@@ -1,10 +1,15 @@
 <template>
-  <div>
+  <div class="main-div">
+      <div class="div-subclass">
+          <div class="recipe-name">   
+      <h1>Meal List</h1>
+       </div>
 <div v-for="meal in meals" v-bind:key="meal.mealId">
           <div>
               <h2>{{meal.mealName}}</h2>
-              </div>
 </div>
+</div>
+  </div>
   </div>
 </template>
 

@@ -1,20 +1,21 @@
 <template>
-<div>
-   <form v-on:submit.prevent>
-        Recipe Name:
+<div class="main-div">
+   <form v-on:submit.prevent class="form-edit">
+       <h2>Recipe Name:</h2>
         <input type="text" class="form-control" v-model="newRecipe.recipeName" />
-        Recipe instructions:
+       <h2>Recipe instructions:</h2>
         <textarea
           class="form-control"
           v-model="newRecipe.instructions"
         />
-          Recipe Description:
+        <h2>Recipe Description:</h2>
         <textarea
           class="form-control"
           v-model="newRecipe.description"/>
           <multiselect v-model="newRecipe.ingredients" :options="ingredients" label="ingredientName" :multiple="true" :close-on-select="false" :clear-on-select="false" :preserve-search="true" placeholder="Select Your Ingredient" track-by="ingredientId" @remove="toggleUnSelectIngredient"></multiselect>
+        <div class="button-div">
         <button type="submit" class="btn" v-on:click="updateRecipe()">Update Recipe</button>
-
+        </div>
       </form>
       </div>
 </template>
@@ -105,11 +106,7 @@ export default {
 }
 .btn {margin-bottom: 35px;}
 
-form {
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-}
+
 
 #add {
   display:flex;
@@ -117,10 +114,17 @@ form {
 
 }
 
-form{
-  border: black 3px solid;
+.form-edit{
+  border: none;
   padding: 10px;
   border-radius: 10px;
 
+}
+.main-div{
+  width: 30%;
+}
+.button-div{
+  margin: 10px auto 0 auto;
+  
 }
 </style>

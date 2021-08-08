@@ -8,7 +8,6 @@
           class="form-control"
           v-model="newMealPlan.mealplanName"
         />
-        
         Day of Week:
         <input type="radio" id= 1  name="day_of_week" value= 1 v-model="newMealPlan.mealplanDay" />
         <label for= 1>Monday</label><br />
@@ -24,8 +23,15 @@
         <label for= 6>Saturday</label><br />
         <input type="radio" id= 7  name="day_of_week" value= 7 v-model="newMealPlan.mealplanDay" />
         <label for= 7>Sunday</label><br />
-        
-        
+        <select 
+        v-model="newMealPlan.mealplanDay" 
+        :options2="mealplanDays"
+         :close-on-select="false"
+          :clear-on-select="false"
+          :preserve-search="true"
+          placeholder="Day of Week"
+          track-by="mealplanDay"/>
+
         <multiselect
           v-model="newMealPlan.mealList"
           :options="mealList"
@@ -38,9 +44,11 @@
           track-by="mealId"
           @remove="toggleUnSelectMeal"
         ></multiselect>
+        <div class="submit-btn">
         <button type="submit" class="btn" v-on:click="createMealPlan">
           Add Meal Plan
         </button>
+        </div>
       </form>
     </div>
   </div>
@@ -62,6 +70,7 @@ export default {
         mealList: [],
       },
       mealList: [],
+      mealplanDays: [1, 2, 3, 4, 5, 6, 7]
     };
   },
   methods: {
@@ -89,7 +98,7 @@ export default {
           }
         });
     },
-    toggleUnSelectRecipe(mealId) {
+    toggleUnSelectMeal(mealId) {
       this.newMealPlan.meals = this.newMealPlan.mealList.filter((meal) => {
         return meal.mealId != mealId;
       });
@@ -97,6 +106,7 @@ export default {
   },
   computed: {
     options: () => this.mealList,
+    options2:() => this.mealplanDays
   },
   created() {
     MealService.viewMeals().then((response) => {

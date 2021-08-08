@@ -18,34 +18,33 @@
 </template>-->
 <template>
   <body>
-    <div class="flex-container">
-      <div class="flex-item bordered flex-container">
+    <div class="flex-container-main">
+      <div class="flex-item bordered flex-container-sub">
         <div class="divitems"><h1>Ingredients</h1></div>
         <div class="divitems"><add-ingredient></add-ingredient></div>
       </div>
-      <div class="flex-item bordered flex-container">
+      <div class="flex-item bordered flex-container-sub">
         <div class="divitems"><h1>Create a Recipe</h1></div>
         <div class="divitems"><add-recipe></add-recipe></div>
-        <div>
+        <div class="button-div">
           <router-link v-bind:to="{ name: 'recipeList' }"
-            >View my recipes</router-link
+            ><button class="view-button">View my recipes</button></router-link
           >
         </div>
       </div>
-      <div class="flex-item bordered flex-container">
+      <div class="flex-item bordered flex-container-sub">
         <div class="divitems"><h1>Create a Meal</h1></div>
         <div class="divitems"><create-meal></create-meal></div>
-        <div>
-          <router-link v-bind:to="{ name: 'meals' }">View Meals</router-link>
+        <div class="button-div">
+          <router-link v-bind:to="{ name: 'meals' }"><button class="view-button"> Meals</button></router-link>
         </div>
       </div>
-      <div class="flex-item bordered flex-container">
+      <div class="flex-item bordered flex-container-sub">
         <div class="divitems"><h1>Create a Meal Plan</h1></div>
         <div class="divitems"><create-meal-plan></create-meal-plan></div>
-        <div>
-          <router-link v-bind:to="{ name: 'mealPlans' }"
-            >View Meal Plans</router-link
-          >
+        <div class="button-div">
+            <router-link v-bind:to="{ name: 'mealPlans' }"
+            ><button class="view-button">View Meal Plans</button></router-link>
         </div>
       </div>
     </div>
@@ -68,29 +67,69 @@ export default {
   },
 };
 </script>
-
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100&display=swap');
+</style>
 <style>
 #nav a {
   font-weight: bold;
 }
 
-.flex-container {
+.flex-container-main {
   display: flex;
   justify-content: space-around;
+  
 }
-
+.flex-container-sub{
+  display: flex;
+  background-color: #FFF2E6;
+  
+}
 .bordered {
-  border: 3px solid black;
+  border: 4px solid #Fa6900;
   padding: 15px;
   border-radius: 10px;
 }
 
 .divitems {
-  border: 1px solid black;
+  
   padding: 15px;
+  align-items: flex-start;
+  text-decoration: underline;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: bold;
+  margin: 0 auto 0 auto;
 }
 
 .flex-item {
   flex-direction: column;
+  
 }
+.view-button{
+  display:inline-block;
+padding:0.5em 3em;
+border:0.16em solid #F38630;
+margin:0 0.3em 0.3em 0;
+box-sizing: border-box;
+text-decoration:none;
+text-transform:uppercase;
+font-family:'Roboto',sans-serif;
+font-weight:400;
+background-color:white;
+text-align:center;
+transition: all 0.15s;
+color:black;
+
+}
+.view-button:hover{
+  color:black;
+border-color:black;
+background-color: whitesmoke;
+}
+.button-div{
+
+margin: 5px auto 0 auto;
+
+}
+
 </style> 

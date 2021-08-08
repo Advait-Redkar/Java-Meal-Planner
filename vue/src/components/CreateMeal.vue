@@ -1,7 +1,7 @@
 <template>
     <div id="add">
     <div>
-      <form>
+      <form v-on:submit.prevent>
         Meal Name:
         <input
           type="text"
@@ -23,9 +23,11 @@
           track-by="recipeId"
           @remove="toggleUnSelectRecipe"
         ></multiselect>
+        <div class="submit-btn">
         <button type="submit" class="btn" v-on:click="createMeal">
           Add Meal 
         </button>
+        </div>
       </form>
     </div>
   </div>
