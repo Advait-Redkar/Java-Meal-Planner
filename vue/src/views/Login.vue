@@ -23,7 +23,9 @@
         required
         autofocus
       />
+      
       <label for="password" class="sr-only">Password</label>
+      
       <input
         type="password"
         id="password"
@@ -76,7 +78,9 @@ export default {
   }
 };
 </script>
-
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@100&display=swap');
+</style>
 <style>
 #form {
   display: flex;
@@ -94,7 +98,12 @@ export default {
   border: black 3px solid;
   padding: 10px;
   border-radius: 10px;
+  background-color: #FFF2E6;
 
+}
+label{
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: bold;
 }
 
 
