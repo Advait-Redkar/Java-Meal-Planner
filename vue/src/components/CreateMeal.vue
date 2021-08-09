@@ -1,7 +1,7 @@
 <template>
     <div id="add">
     <div>
-      <form v-on:submit.prevent>
+      <form>
         Meal Name:
         <input
           type="text"
@@ -9,8 +9,14 @@
           v-model="newMeal.mealName"
         />
         Type of Meal:
-        <textarea class="form-control" v-model="newMeal.mealType" />
-
+        <!-- <textarea class="form-control" v-model="newMeal.mealType" /> -->
+        <select v-model="newMeal.mealType">
+          <option value=1>Breakfast</option>
+          <option value=2>Lunch</option>
+          <option value=3>Dinner</option>
+          <option value=4>Snack</option>
+        </select>
+        <div class="multiselect">
         <multiselect
           v-model="newMeal.recipeList"
           :options="recipeList"
@@ -23,6 +29,7 @@
           track-by="recipeId"
           @remove="toggleUnSelectRecipe"
         ></multiselect>
+        </div>
         <div class="submit-btn">
         <button type="submit" class="btn" v-on:click="createMeal">
           Add Meal 
@@ -98,5 +105,8 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style>
+.multiselect{
+  margin: 10px 0 0 0;
+}
 
 </style>

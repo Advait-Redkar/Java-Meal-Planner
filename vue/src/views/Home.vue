@@ -20,11 +20,11 @@
   <body>
     <div class="flex-container-main">
       <div class="flex-item bordered flex-container-sub">
-        <div class="divitems"><h1>Ingredients</h1></div>
+        <div class="divitems title-name"><h1>Ingredients</h1></div>
         <div class="divitems"><add-ingredient></add-ingredient></div>
       </div>
       <div class="flex-item bordered flex-container-sub">
-        <div class="divitems"><h1>Create a Recipe</h1></div>
+        <div class="divitems title-name"><h1>Create a Recipe</h1></div>
         <div class="divitems"><add-recipe></add-recipe></div>
         <div class="button-div">
           <router-link v-bind:to="{ name: 'recipeList' }"
@@ -33,14 +33,14 @@
         </div>
       </div>
       <div class="flex-item bordered flex-container-sub">
-        <div class="divitems"><h1>Create a Meal</h1></div>
+        <div class="divitems title-name"><h1>Create a Meal</h1></div>
         <div class="divitems"><create-meal></create-meal></div>
         <div class="button-div">
           <router-link v-bind:to="{ name: 'meals' }"><button class="view-button"> Meals</button></router-link>
         </div>
       </div>
       <div class="flex-item bordered flex-container-sub">
-        <div class="divitems"><h1>Create a Meal Plan</h1></div>
+        <div class="divitems title-name"><h1>Create a Meal Plan</h1></div>
         <div class="divitems"><create-meal-plan></create-meal-plan></div>
         <div class="button-div">
             <router-link v-bind:to="{ name: 'mealPlans' }"
@@ -95,7 +95,6 @@ export default {
   
   padding: 15px;
   align-items: flex-start;
-  text-decoration: underline;
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: bold;
   margin: 0 auto 0 auto;
@@ -131,5 +130,7 @@ background-color: whitesmoke;
 margin: 5px auto 0 auto;
 
 }
-
+.title-name{
+  text-decoration: underline;
+}
 </style> 

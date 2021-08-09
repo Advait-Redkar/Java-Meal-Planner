@@ -9,7 +9,7 @@
           v-model="newMealPlan.mealplanName"
         />
         Day of Week:
-        <input type="radio" id= 1  name="day_of_week" value= 1 v-model="newMealPlan.mealplanDay" />
+        <!-- <input type="radio" id= 1  name="day_of_week" value= 1 v-model="newMealPlan.mealplanDay" />
         <label for= 1>Monday</label><br />
         <input type="radio" id= 2  name="day_of_week" value= 2 v-model="newMealPlan.mealplanDay" />
         <label for= 2>Tuesday</label><br />
@@ -22,15 +22,23 @@
         <input type="radio" id= 6  name="day_of_week" value= 6 v-model="newMealPlan.mealplanDay" />
         <label for= 6>Saturday</label><br />
         <input type="radio" id= 7  name="day_of_week" value= 7 v-model="newMealPlan.mealplanDay" />
-        <label for= 7>Sunday</label><br />
+        <label for= 7>Sunday</label><br /> -->
         <select 
         v-model="newMealPlan.mealplanDay" 
-        :options2="mealplanDays"
+        
          :close-on-select="false"
           :clear-on-select="false"
           :preserve-search="true"
           placeholder="Day of Week"
-          track-by="mealplanDay"/>
+          track-by="mealplanDay">
+          <option value=1>Monday</option>
+          <option value=2>Tuesday</option>
+          <option value=3>Wednesday</option>
+          <option value=4>Thursday</option>
+          <option value=5>Friday</option>
+          <option value=6>Saturday</option>
+          <option value=7>Sunday</option>
+        </select>
 
         <multiselect
           v-model="newMealPlan.mealList"
