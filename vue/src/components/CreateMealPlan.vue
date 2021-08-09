@@ -7,6 +7,7 @@
           type="text"
           class="form-control"
           v-model="newMealPlan.mealplanName"
+          required="true"
         />
         Day of Week:
         <select 
@@ -16,7 +17,9 @@
           :clear-on-select="false"
           :preserve-search="true"
           placeholder="Day of Week"
-          track-by="mealplanDay">
+          track-by="mealplanDay"
+          required="true"
+          >
           <option value=1>Monday</option>
           <option value=2>Tuesday</option>
           <option value=3>Wednesday</option>
@@ -24,6 +27,7 @@
           <option value=5>Friday</option>
           <option value=6>Saturday</option>
           <option value=7>Sunday</option>
+          
         </select>
 
         <multiselect
@@ -37,6 +41,8 @@
           placeholder="Select Your Meal"
           track-by="mealId"
           @remove="toggleUnSelectMeal"
+          :allow-empty="false"
+          required
         ></multiselect>
         <div class="submit-btn">
         <button type="submit" class="btn" v-on:click="createMealPlan">

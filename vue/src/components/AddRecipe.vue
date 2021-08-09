@@ -7,9 +7,10 @@
           type="text"
           class="form-control"
           v-model="newRecipe.recipeName"
+          required
         />
         Recipe instructions:
-        <textarea class="form-control" v-model="newRecipe.instructions" />
+        <textarea class="form-control" v-model="newRecipe.instructions" required></textarea>
         Recipe Description:
         <textarea class="form-control" v-model="newRecipe.description" />
         <multiselect
@@ -59,7 +60,8 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             alert("Recipe Succesfully Added");
-            this.$router.push({ name: "home" });
+            // this.$router.push({ name: "home" });
+            this.newRecipe={}
           }
         })
         .catch((error) => {

@@ -3,7 +3,7 @@
     <div>
       <form>
         Ingredient Name:
-        <input type="text" class="form-control" v-model="newIngredient.ingredientName" />
+        <input type="text" class="form-control" v-model="newIngredient.ingredientName" required/>
         <button type="submit" class="btn" v-on:click="createIngredient">Add Ingredient</button>
       </form>
     </div>
@@ -32,7 +32,8 @@ name: "add-ingredient",
         .then((response) => {
           if (response.status === 200) {
             alert("Ingredient Succesfully Added");
-            this.$router.push({ name: 'home' });
+            // this.$router.push({ name: 'home' });
+            this.newIngredient={}
           }
         })
         .catch((error) => {
