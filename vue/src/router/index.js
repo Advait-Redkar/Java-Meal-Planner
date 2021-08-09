@@ -15,6 +15,7 @@ import MealPlanListView from '@/views/MealPlanListView'
 import CreateMealView from '@/views/CreateMealView'
 import MealListView from '@/views/MealListView'
 import MealPlanDetailsView from '@/views/MealPlanDetailsView'
+import EditMealPlanView from '@/views/EditMealPlanView'
 
 
 Vue.use(Router)
@@ -153,11 +154,16 @@ const router = new Router({
     meta:{
       requiresAuth: true
     }
+  },
+{
+  path: "/mealplans/edit/:mealplanId",
+  name:"editMealplan",
+  component: EditMealPlanView,
+  meta: {
+    requiresAuth: true
   }
 
-    
-
-    
+}    
   ]
 })
 

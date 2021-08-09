@@ -13,7 +13,12 @@ export default{
 
     viewMealPlanDetails(mealplanId){
         return axios.get(`/mealplans/${mealplanId}`)
+    },
+    
+    editMealPlan(mealplanId, mealPlan){
+        return axios.put(`/mealplans/edit/${mealplanId}`, mealPlan)
     }
+
 
 
 }

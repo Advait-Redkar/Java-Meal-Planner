@@ -85,6 +85,32 @@ public class JdbcMealplanDao implements MealplanDao{
         return meals;
     }
 
+    @Override
+    public void editMealPlan(int mealPlanId, Mealplan mealplan, Principal principal) {
+        String sql=
+                "UPDATE mealplan " +
+                        "SET mealplan_name=?, mealplan_day=?" +
+                        "WHERE mealplan_id = ?; ";
+        jdbcTemplate.update(sql, mealplan.getMealplanName(), mealplan.getMealplanDay(), mealPlanId);
+
+        sql = "DELETE FROM mealplan_meal " +
+                "WHERE mealplan_id = ?;";
+        jdbcTemplate.update(sql, mealPlanId);
+
+        String currentUserName= principal.getName();
+        int currentUserId=userDao.findIdByUsername(currentUserName);
+
+        for (int i=0; i<mealplan.getMealList().size();i++) {
+            String sql2 = "INSERT INTO mealplan_meal(meal_id, mealplan_id) " +
+                    "VALUES ";
+            Meal meal = mealplan.getMealList().get(i);
+            String mealName = meal.getMealName();
+            String newStr = "(" + getMealIdFromMealName(mealName, currentUserId) + "," + mealPlanId + ")";
+            sql2 = sql2 + newStr;
+            jdbcTemplate.update(sql2);
+        }
+    }
+
     private int getMealIdFromMealName(String name, int userId){
         int mealId = 0;
         String sql="SELECT meal_id " +

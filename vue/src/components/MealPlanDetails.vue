@@ -24,6 +24,13 @@
           </h3>
         </ul>
       </div>
+      <router-link
+      v-bind:to="{ name: 'editMealplan', params: { mealplanId: mealplan.mealplanId } }"
+    >
+      <button class="edit-button">
+        Edit Recipe
+      </button>
+    </router-link>
     </div>
   </div>
 </template>

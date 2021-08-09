@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.MealplanDao;
 import com.techelevator.model.Mealplan;
+import com.techelevator.model.Recipe;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,5 +32,10 @@ public class MealplanController {
     @RequestMapping(value="/mealplans/{mealplanId}",method = RequestMethod.GET)
     public Mealplan getMealplanById(@PathVariable int mealplanId, Principal principal){
         return mealplanDao.getMealPlanById(mealplanId,principal);
+    }
+
+    @RequestMapping(value="/mealplans/edit/{mealplanId}", method = RequestMethod.PUT)
+    public void editMealplan(@PathVariable int mealplanId, @RequestBody Mealplan mealplan, Principal principal){
+        mealplanDao.editMealPlan(mealplanId, mealplan, principal);
     }
 }
