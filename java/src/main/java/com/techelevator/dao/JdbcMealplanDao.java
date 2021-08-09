@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Ingredient;
 import com.techelevator.model.Meal;
 import com.techelevator.model.Mealplan;
 import com.techelevator.model.Recipe;
@@ -23,17 +24,17 @@ public class JdbcMealplanDao implements MealplanDao{
     }
     @Override
     public void createMealplan(Mealplan mealplan, Principal principal) {
-        String sql = "INSERT INTO mealplan(mealplan_name, mealplan_time, mealplan_day, user_id) " +
-                     "VALUES(?,?,?,?) "+
+        String sql = "INSERT INTO mealplan(mealplan_name, mealplan_day, user_id) " +
+                     "VALUES(?,?,?) "+
                      "RETURNING mealplan_id;";
         String currentUserName= principal.getName();
         int currentUserId=userDao.findIdByUsername(currentUserName);
-        int mealplanId = jdbcTemplate.queryForObject(sql, int.class, mealplan.getMealplanName(), mealplan.getMealplanTime(), mealplan.getMealplanDay(), currentUserId);
+        int mealplanId = jdbcTemplate.queryForObject(sql, int.class, mealplan.getMealplanName(), mealplan.getMealplanDay(), currentUserId);
         for(Meal meal: mealplan.getMealList()){
             String name  = meal.getMealName();
             sql = "INSERT INTO mealplan_meal(mealplan_id, meal_id) " +
                     "VALUES(?,?);";
-            jdbcTemplate.update(sql, getMealIdFromMealName(name,currentUserId),mealplanId);
+            jdbcTemplate.update(sql, mealplanId, getMealIdFromMealName(name,currentUserId));
         }
 
     }
@@ -43,7 +44,7 @@ public class JdbcMealplanDao implements MealplanDao{
         List<Mealplan>mealplans=new ArrayList<>();
         String currentUserName= principal.getName();
         int currentUserId=userDao.findIdByUsername(currentUserName);
-        String sql="SELECT user_id, mealplan_id, mealplan_name, mealplan_time, mealplan_day " +
+        String sql="SELECT user_id, mealplan_id, mealplan_name, mealplan_day " +
                 "FROM mealplan " +
                 "WHERE user_id=?;";
         SqlRowSet results= jdbcTemplate.queryForRowSet(sql,currentUserId);
@@ -52,6 +53,36 @@ public class JdbcMealplanDao implements MealplanDao{
             mealplans.add(mealplan);
         }
         return mealplans;
+    }
+
+    @Override
+    public Mealplan getMealPlanById(int mealPlanId, Principal principal) {
+        Mealplan mealplan = new Mealplan();
+        String sql= "SELECT mealplan_id, mealplan_name, mealplan_day, user_id " +
+                "FROM mealplan " +
+                "WHERE mealplan_id = ?;";
+        SqlRowSet rs= jdbcTemplate.queryForRowSet(sql, mealPlanId);
+        if(rs.next()){
+            mealplan=mapRowToMealPlan(rs);
+            mealplan.setMealList(getMealsForMealPlan(mealPlanId, principal));
+        }
+
+        return mealplan;
+    }
+
+    @Override
+    public List<Meal> getMealsForMealPlan(int mealPlanId, Principal principal) {
+        List<Meal>meals=new ArrayList<>();
+        String sql="SELECT user_id, meals.meal_id, meal_name, meal_type " +
+                "FROM meals " +
+                "JOIN mealplan_meal ON mealplan_meal.meal_id = meals.meal_id " +
+                "WHERE mealplan_id=?;";
+        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql,mealPlanId);
+        while(rs.next()){
+            Meal meal=mapMealsToMealPlan(rs);
+            meals.add(meal);
+        }
+        return meals;
     }
 
     private int getMealIdFromMealName(String name, int userId){
@@ -79,11 +110,20 @@ public class JdbcMealplanDao implements MealplanDao{
         Mealplan mealplan = new Mealplan();
         mealplan.setMealplanId(rs.getInt("mealplan_id"));
         mealplan.setMealplanName(rs.getString("mealplan_name"));
-        mealplan.setMealplanTime(rs.getString("mealplan_time"));
         mealplan.setMealplanDay(rs.getInt("mealplan_day"));
         mealplan.setUserId(rs.getInt("user_id"));
         //recipe.setIngredients(rs.getObject("recipe_ingredients"));
         return mealplan;
     }
+    private Meal mapMealsToMealPlan(SqlRowSet rs){
+        Meal meal = new Meal();
+        meal.setUserId(rs.getInt("user_id"));
+        meal.setMealId(rs.getInt("meal_id"));
+        meal.setMealName(rs.getString("meal_name"));
+        meal.setMealType(rs.getInt("meal_type"));
+        return meal;
+    }
+
+
 
 }

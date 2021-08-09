@@ -7,17 +7,17 @@ public class Mealplan {
 
     private int mealplanId;
     private String mealplanName;
-    private String mealplanTime;
+    private List<Meal>mealList;
     private int mealplanDay;
 
 
-    private List<Meal> mealList;
 
-    public Mealplan(int userId, int mealplanId, String mealplanName, String mealplanTime, int mealplanDay, List<Meal> mealList) {
+
+    public Mealplan(int userId, int mealplanId, String mealplanName, int mealplanDay, List<Meal> mealList) {
         this.userId = userId;
         this.mealplanId = mealplanId;
         this.mealplanName = mealplanName;
-        this.mealplanTime = mealplanTime;
+
         this.mealplanDay = mealplanDay;
         this.mealList = mealList;
     }
@@ -56,14 +56,6 @@ public class Mealplan {
 
     public void setMealplanName(String mealplanName) {
         this.mealplanName = mealplanName;
-    }
-
-    public String getMealplanTime() {
-        return mealplanTime;
-    }
-
-    public void setMealplanTime(String mealplanTime) {
-        this.mealplanTime = mealplanTime;
     }
 
     public int getMealplanDay() {

@@ -9,6 +9,10 @@ export default{
 
     viewMealPlans(){
         return axios.get('/mealplans')
+    },
+
+    viewMealPlanDetails(mealplanId){
+        return axios.get(`/mealplans/${mealplanId}`)
     }
 
 

@@ -5,7 +5,7 @@
       <h1>Recipe List</h1>
        </div>
       <div v-for="recipe in recipes" v-bind:key="recipe.recipeId">
-          <div>
+          <div class="list-btn-div">
               <router-link v-bind:to="{name: 'recipeDetails', params: {recipeId:recipe.recipeId}}">
               <button class="list-button">{{recipe.recipeName}}</button>
               </router-link>
@@ -52,7 +52,11 @@ background-color:white;
 text-align:center;
 transition: all 0.15s;
 color:black;
-width: 500px;
+width: auto;
+}
 
+.list-btn-div{
+    display: flex;
+    flex-wrap: wrap;
 }
 </style>

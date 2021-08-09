@@ -63,7 +63,6 @@ CREATE TABLE mealplan (
 	user_id int,
 	mealplan_id serial,
 	mealplan_name varchar(50) NOT NULL,
-	mealplan_time varchar(50) NOT NULL,
 	mealplan_day int,
 	CONSTRAINT PK_mealplan PRIMARY KEY(mealplan_id),
 	CONSTRAINT FK_usermp FOREIGN KEY(user_id) REFERENCES users(user_id),

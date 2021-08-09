@@ -5,15 +5,15 @@
       <h1>{{ recipe.recipeName }}</h1>
     </div>
     <div>
-      <h2>Recipe Description</h2>
+      <h2>Description</h2>
       <h3>{{ recipe.description }}</h3>
     </div>
     <div>
-      <h2>Recipe Instructions</h2>
+      <h2>Instructions</h2>
       <h3>{{ recipe.instructions }}</h3>
     </div>
     <div>
-      <h2>Recipe Ingredients</h2>
+      <h2>Ingredients</h2>
       <ul
         id="example-1"
         v-for="ingredients in recipe.ingredients"

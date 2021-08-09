@@ -1,6 +1,9 @@
 <template>
 <div id = "add">
     <div>
+      <div v-if="validationFailMsg.length > 0"> <!--DIY Validation Step 4 Add a div that shows the error if there is one. You should style this yourself-->
+        Error: {{validationFailMsg}}
+      </div>
       <form>
         Ingredient Name:
         <input type="text" class="form-control" v-model="newIngredient.ingredientName" required/>
@@ -22,17 +25,26 @@ name: "add-ingredient",
       newIngredient: {
         ingredientName: "",
       },
-      
+      validationFailMsg:"",
     };
   },
    methods: {
+     checkValidation() {
+      this.validationFailMsg = "";
+      if (this.newIngredient.ingredientName.length === 0) {
+        this.validationFailMsg += "Ingredient name is required\n";
+      }
+      
+      return this.validationFailMsg.length ===0;
+    },
     createIngredient() {
+      if(this.checkValidation()){
       ingredientService
         .addIngredient(this.newIngredient)
         .then((response) => {
           if (response.status === 200) {
             alert("Ingredient Succesfully Added");
-            // this.$router.push({ name: 'home' });
+            this.$router.push({ name: 'home' });
             this.newIngredient={}
           }
         })
@@ -49,6 +61,7 @@ name: "add-ingredient",
               "Error adding card. Request could not be created.";
           }
         });
+      }
     },
   },
 }

@@ -27,4 +27,9 @@ public class MealplanController {
     public List<Mealplan> mealplanList(Principal principal){
         return mealplanDao.getAllMealPlans(principal);
     }
+
+    @RequestMapping(value="/mealplans/{mealplanId}",method = RequestMethod.GET)
+    public Mealplan getMealplanById(@PathVariable int mealplanId, Principal principal){
+        return mealplanDao.getMealPlanById(mealplanId,principal);
+    }
 }

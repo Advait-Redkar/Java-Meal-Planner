@@ -36,7 +36,7 @@
         <div class="divitems title-name"><h1>Create a Meal</h1></div>
         <div class="divitems"><create-meal></create-meal></div>
         <div class="button-div">
-          <router-link v-bind:to="{ name: 'meals' }"><button class="view-button"> Meals</button></router-link>
+          <router-link v-bind:to="{ name: 'meals' }"><button class="view-button">View Meals</button></router-link>
         </div>
       </div>
       <div class="flex-item bordered flex-container-sub">

@@ -1,16 +1,20 @@
 <template>
     <div id="add">
     <div>
+      <div v-if="validationFailMsg.length > 0"> <!--DIY Validation Step 4 Add a div that shows the error if there is one. You should style this yourself-->
+        Error: {{validationFailMsg}}
+      </div>
       <form>
         Meal Name:
         <input
           type="text"
           class="form-control"
           v-model="newMeal.mealName"
+          required
         />
         Type of Meal:
         <!-- <textarea class="form-control" v-model="newMeal.mealType" /> -->
-        <select v-model="newMeal.mealType">
+        <select v-model="newMeal.mealType" required>
           <option value=1>Breakfast</option>
           <option value=2>Lunch</option>
           <option value=3>Dinner</option>
@@ -37,6 +41,7 @@
         </div>
       </form>
     </div>
+    
   </div>
 
 
@@ -58,16 +63,32 @@ export default {
                 recipeList: [],
             },
             recipeList: [],
+            validationFailMsg: "",
         };
     },
     methods: {
+    checkValidation() {
+      this.validationFailMsg = "";
+      if (this.newMeal.mealName.length === 0) {
+        this.validationFailMsg += "Meal name is required\n";
+      }
+      if (this.newMeal.mealType.length === 0) {
+        this.validationFailMsg += "Meal type is required\n";
+      }
+      if (this.newMeal.recipeList.length === 0) {
+        this.validationFailMsg += "Recipe list is required\n";
+      }
+      return this.validationFailMsg.length ===0;
+    },
     createMeal() {
+      if (this.checkValidation()){
       mealService
         .addMeal(this.newMeal)
         .then((response) => {
           if (response.status === 200) {
             alert("Meal Succesfully Added");
             this.$router.push({ name: "home" });
+            this.newMeal = {};
           }
         })
         .catch((error) => {
@@ -84,6 +105,7 @@ export default {
               "Error adding meal. Request could not be created.";
           }
         });
+      }
     },
      toggleUnSelectRecipe(recipeId) {
       this.newMeal.recipes = this.newMeal.recipeList.filter((recipe) => {

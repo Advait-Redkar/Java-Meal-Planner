@@ -32,7 +32,7 @@
           track-by="ingredientId"
         ></multiselect>
         <div class="submit-btn">
-          <button type="submit" class="btn" v-on:click.prevent="createRecipe"> <!--DIY Validation Step 5 Don't refresh automatically so add the .prevent -->
+          <button type="submit" class="btn" v-on:click="createRecipe"> <!--DIY Validation Step 5 Don't refresh automatically so add the .prevent -->
             Add Recipe
           </button>
         </div>
@@ -87,7 +87,7 @@ export default {
           .then((response) => {
             if (response.status === 200) {
               alert("Recipe Succesfully Added");
-              // this.$router.push({ name: "home" });
+              this.$router.push({ name: "home" });
               this.newRecipe = {};
             }
           })

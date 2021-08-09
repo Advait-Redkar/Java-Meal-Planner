@@ -1,6 +1,9 @@
 <template>
   <div id="add">
     <div>
+      <div v-if="validationFailMsg.length > 0"> <!--DIY Validation Step 4 Add a div that shows the error if there is one. You should style this yourself-->
+        Error: {{validationFailMsg}}
+      </div>
       <form>
         Meal Plan Name:
         <input
@@ -65,22 +68,37 @@ export default {
     return {
       newMealPlan: {
         mealplanName: "",
-        mealplanTime: "",
         mealplanDay: null,
         mealList: [],
       },
       mealList: [],
-      mealplanDays: [1, 2, 3, 4, 5, 6, 7]
+      mealplanDays: [1, 2, 3, 4, 5, 6, 7],
+      validationFailMsg:"",
     };
   },
   methods: {
+    checkValidation() {
+      this.validationFailMsg = "";
+      if (this.newMealPlan.mealplanName.length === 0) {
+        this.validationFailMsg += "Meal plan name is required\n";
+      }
+      if (this.newMealPlan.mealplanDay === null) {
+        this.validationFailMsg += "Meal plan day is required\n";
+      }
+      if (this.newMealPlan.mealList.length === 0) {
+        this.validationFailMsg += "At least one meal is required";
+      }
+      return this.validationFailMsg.length ===0;
+    },
     createMealPlan() {
+      if(this.checkValidation()){
       mealPlanService
         .addMealPlan(this.newMealPlan)
         .then((response) => {
           if (response.status === 200) {
             alert("Meal Plan Succesfully Added");
             this.$router.push({ name: "home" });
+            this.newMealPlan={};
           }
         })
         .catch((error) => {
@@ -97,6 +115,7 @@ export default {
               "Error adding meal plan. Request could not be created.";
           }
         });
+      }
     },
     toggleUnSelectMeal(mealId) {
       this.newMealPlan.meals = this.newMealPlan.mealList.filter((meal) => {

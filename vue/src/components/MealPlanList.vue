@@ -5,8 +5,12 @@
       <h1>Meal Plan List</h1>
        </div>
 <div v-for="mealplan in mealPlans" v-bind:key="mealplan.mealplanId">
-          <div>
-              <h2>{{mealplan.mealplanName}}</h2>
+          <div class="list-btn-div">
+              <router-link v-bind:to="{name:'mealPlanDetails', params: {mealplanId:mealplan.mealplanId}}">
+                  <button class="list-button">
+              {{mealplan.mealplanName}}
+              </button>
+              </router-link>
               </div>
 </div>
   </div>
