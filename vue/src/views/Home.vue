@@ -131,6 +131,16 @@ margin: 5px auto 0 auto;
 
 }
 .title-name{
-  text-decoration: underline;
+  /*text-decoration: underline; */
+   color: #994000
+}
+
+@media only screen and (max-width: 1228px) {
+ .divitems {
+    display: flex;
+    flex-direction: horizontal;
+  }
+
+
 }
 </style> 

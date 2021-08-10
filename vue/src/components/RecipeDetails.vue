@@ -82,10 +82,19 @@ border-color:black;
 background-color: whitesmoke;
 }
 .div-subclass{
-  margin: 0 auto 0 auto;
+ /*  margin: 0 auto 0 auto;*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 0px;
+
 }
 .recipe-name{
-  text-decoration: underline;
+  /* text-decoration: underline; */
+  color: #994000;
   justify-self: flex-start;
 }
+
+/*can use align-items:flex-start if want description to float left*/
 </style>
+

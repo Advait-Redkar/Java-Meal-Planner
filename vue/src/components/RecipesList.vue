@@ -57,7 +57,21 @@ width: 250px;
 
 .list-btn-div{
     display: flex;
-    flex-wrap: wrap;
-    width: 200px;
+   /* flex-wrap: wrap;
+    width: 200px;*/
 }
+
+
+/*added this */
+@media only screen and (max-width: 885px) {
+.list-button{
+    display: flex;
+    flex-wrap: flex;
+    width: 100px;
+    font-size: .7em;
+    text-decoration: none;
+}
+
+}
+
 </style>

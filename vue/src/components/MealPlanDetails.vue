@@ -2,12 +2,12 @@
   <div class="main-div">
     <div class="div-subclass">
       <div class="recipe-name">
-        <h1>{{ mealplan.mealplanName }}</h1>
+        <h1>{{ dayOfWeekMapping[mealplan.mealplanDay] }}: {{ mealplan.mealplanName }}</h1>
       </div>
-      <div>
+      <!-- <div>
         <h2>{{ dayOfWeekMapping[mealplan.mealplanDay] }}</h2>
-      </div>
-      <div>
+      </div> -->
+      <div class="innerlist">
         <ul
           id="example-1"
           v-for="meals in mealplan.mealList"
@@ -63,5 +63,10 @@ export default {
   },
 };
 </script>
+<style>
+#example-1{
+  text-align: left;
 
-<style></style>
+}
+
+</style>

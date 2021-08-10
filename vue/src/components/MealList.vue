@@ -7,6 +7,8 @@
 <div v-for="meal in meals" v-bind:key="meal.mealId">
           <div>
               <h2>{{meal.mealName}}</h2>
+             <!-- <p class="list-button">{{meal.mealName}}</p> -->
+
 </div>
 </div>
   </div>
