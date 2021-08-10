@@ -74,6 +74,7 @@ background-color:white;
 text-align:center;
 transition: all 0.15s;
 color:black;
+
 }
 .edit-button:hover{
    color:black;
