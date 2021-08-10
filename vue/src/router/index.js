@@ -16,7 +16,7 @@ import CreateMealView from '@/views/CreateMealView'
 import MealListView from '@/views/MealListView'
 import MealPlanDetailsView from '@/views/MealPlanDetailsView'
 import EditMealPlanView from '@/views/EditMealPlanView'
-
+import GroceriesView from '@/views/GroceriesView'
 
 Vue.use(Router)
 
@@ -162,8 +162,15 @@ const router = new Router({
   meta: {
     requiresAuth: true
   }
-
-}    
+},    
+{
+  path: "/mealplans/:mealplanId/groceries",
+  name: "groceries",
+  component: GroceriesView,
+  meta: {
+    requiresAuth: true
+  }
+}
   ]
 })
 

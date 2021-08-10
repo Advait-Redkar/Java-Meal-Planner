@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.MealplanDao;
+import com.techelevator.model.Ingredient;
 import com.techelevator.model.Mealplan;
 import com.techelevator.model.Recipe;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -37,5 +38,10 @@ public class MealplanController {
     @RequestMapping(value="/mealplans/edit/{mealplanId}", method = RequestMethod.PUT)
     public void editMealplan(@PathVariable int mealplanId, @RequestBody Mealplan mealplan, Principal principal){
         mealplanDao.editMealPlan(mealplanId, mealplan, principal);
+    }
+
+    @RequestMapping(value="/mealplans/{mealplanId}/groceries", method = RequestMethod.GET)
+    public List<Ingredient> getIngredientsByMealPlanId(@PathVariable int mealplanId, Principal principal){
+        return mealplanDao.getIngredientsByMealPlanId(mealplanId, principal);
     }
 }

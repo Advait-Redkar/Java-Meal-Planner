@@ -111,6 +111,29 @@ public class JdbcMealplanDao implements MealplanDao{
         }
     }
 
+    @Override
+    public List<Ingredient> getIngredientsByMealPlanId(int mealPlanId, Principal principal) {
+        List<Ingredient>ingredients = new ArrayList<>();
+        String currentUserName= principal.getName();
+        int currentUserId=userDao.findIdByUsername(currentUserName);
+        String sql = "SELECT ingredients.user_id, ingredients.ingredient_id, ingredient_name " +
+        "FROM ingredients " +
+        "JOIN recipes_ingredients ON recipes_ingredients.ingredient_id = ingredients.ingredient_id " +
+        "JOIN recipes ON recipes.recipe_id = recipes_ingredients.recipe_id " +
+        "JOIN meals_recipes ON meals_recipes.recipe_id = recipes.recipe_id " +
+        "JOIN meals ON meals.meal_id = meals_recipes.meal_id " +
+        "JOIN mealplan_meal ON mealplan_meal.meal_id = meals.meal_id " +
+        "JOIN mealplan ON mealplan.mealplan_id = mealplan_meal.mealplan_id " +
+        "WHERE mealplan.mealplan_id = ? AND mealplan.user_id = ?; ";
+
+        SqlRowSet rs = jdbcTemplate.queryForRowSet(sql,mealPlanId, currentUserId);
+        while(rs.next()){
+            Ingredient ingredient = mapRowToIngredient(rs);
+            ingredients.add(ingredient);
+        }
+        return ingredients;
+    }
+
     private int getMealIdFromMealName(String name, int userId){
         int mealId = 0;
         String sql="SELECT meal_id " +
@@ -148,6 +171,14 @@ public class JdbcMealplanDao implements MealplanDao{
         meal.setMealName(rs.getString("meal_name"));
         meal.setMealType(rs.getInt("meal_type"));
         return meal;
+    }
+
+    private Ingredient mapRowToIngredient(SqlRowSet rs){
+        Ingredient ingredient = new Ingredient();
+        ingredient.setUserId(rs.getInt("user_id"));
+        ingredient.setIngredientId(rs.getInt("ingredient_id"));
+        ingredient.setIngredientName(rs.getString("ingredient_name"));
+        return ingredient;
     }
 
 
