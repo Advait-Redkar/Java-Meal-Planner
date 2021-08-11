@@ -66,6 +66,9 @@ public class JdbcRecipeDao implements RecipeDao{
             Recipe recipe=mapRowToRecipe(results);
             recipes.add(recipe);
         }
+        for(Recipe recipe: recipes){
+            recipe.setIngredients(getRecipeIngredients(recipe.getRecipeId(), principal));
+        }
         return recipes;
 
         //for each statement on each of recipes take ID a
