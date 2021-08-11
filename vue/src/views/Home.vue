@@ -16,7 +16,7 @@
     </div>
   </div>
 </template>-->
-<template>
+<template id="home-page">
   <body>
     <div class="flex-container-main">
       <div class="flex-item bordered flex-container-sub">
@@ -135,11 +135,17 @@ margin: 5px auto 0 auto;
    color: #994000
 }
 
+.router-link-exact-active {
+  display: none;
+}
+
+
 @media only screen and (max-width: 1228px) {
  .divitems {
     display: flex;
     flex-direction: horizontal;
   }
+
 
 
 }

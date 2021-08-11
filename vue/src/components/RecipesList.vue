@@ -82,7 +82,6 @@ width: 250px;
 }
 
 .search-bar{
-    display: inline-block;
     border:0.16em solid #F38630;
     width: 242px;
     margin: 0 0 10px 0;
