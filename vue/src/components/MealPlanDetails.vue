@@ -7,9 +7,8 @@
       <!-- <div>
         <h2>{{ dayOfWeekMapping[mealplan.mealplanDay] }}</h2>
       </div> -->
-      <div class="innerlist">
-        <ul
-          id="example-1"
+      <div  id="mealplan">
+        <div
           v-for="meals in mealplan.mealList"
           v-bind:key="meals.mealName"
         >
@@ -17,16 +16,16 @@
             {{ mealTypeMapping[meals.mealType] }}
           </h2>
 
-          <li>
+          <p>
             {{ meals.mealName }}
-          </li>
-        </ul>
+          </p>
+        </div>
       </div>
       <router-link
       v-bind:to="{ name: 'editMealplan', params: { mealplanId: mealplan.mealplanId } }"
     >
       <button class="edit-button">
-        Edit Recipe
+        Edit Meal Plan
       </button>
     </router-link>
      <router-link
@@ -64,9 +63,8 @@ export default {
 };
 </script>
 <style>
-#example-1{
-  text-align: left;
-
+#mealplan {
+  padding-bottom: 10px;
 }
 
 </style>

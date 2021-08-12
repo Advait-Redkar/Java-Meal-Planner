@@ -105,7 +105,7 @@ export default {
   
 }
 .view-button{
-  display:inline-block;
+display:inline-block;
 padding:0.5em 3em;
 border:0.16em solid #F38630;
 margin:0 0.3em 0.3em 0;

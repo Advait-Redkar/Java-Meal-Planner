@@ -120,11 +120,12 @@ export default {
   border-radius: 10px;
 
 }
-/*added padding to this */
+/*added padding to this 
 .main-div{
   width: 30%;
   padding: 20px;
 }
+*/
 .button-div{
   margin: 10px auto 0 auto;
   

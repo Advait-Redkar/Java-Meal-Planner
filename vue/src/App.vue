@@ -16,7 +16,7 @@
             <router-link
               v-bind:to="{ name: 'logout' }"
               v-if="$store.state.token != ''"
-              ><button class="nav-button">Logout</button></router-link
+              ><button class="nav-button" id="logout">Logout</button></router-link
             ></span
           >
         </div>
@@ -69,7 +69,11 @@ body {
   text-align: center;
   transition: all 0.15s;
   color: black;
-  /*margin-right: 20px*/
+}
+
+#logout {
+    margin-right: 20px;
+
 }
 .nav-button:hover {
   color: black;
@@ -102,5 +106,55 @@ body {
   justify-content: center;
   font-size: 200%;
   font-family: "Amatic SC", cursive;
+}
+
+@media only screen and (max-width: 1000px){
+.container {
+  display: flex;
+  flex-direction: column;
+
+  
+}
+.box:first-child > span {
+  align-items: center;
+  background-color: #a7dbd8;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  
+
+}
+
+.box:last-child > span {
+ align-items: center;
+  background-color: #a7dbd8;
+  height: 200px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  font-size: 200%;
+}
+
+.box {
+  align-items: center;
+  background-color: #a7dbd8;
+  margin: 0 0 10px 0;
+  height: 200px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  font-size: 200%;
+  font-family: "Amatic SC", cursive;
+
+}
+
+.flex-container-main{
+  flex-wrap:wrap;
+}
+
+.bordered{
+  margin-bottom: 20px;
+}
+
 }
 </style>

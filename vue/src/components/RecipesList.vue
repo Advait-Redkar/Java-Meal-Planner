@@ -88,16 +88,9 @@ width: 250px;
     height: 28px;
 }
 
-/*added this */
-@media only screen and (max-width: 885px) {
-.list-button{
-    display: flex;
-    flex-wrap: flex;
-    width: 100px;
-    font-size: .7em;
-    text-decoration: none;
-}
 
-}
+
+
+
 
 </style>

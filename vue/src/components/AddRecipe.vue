@@ -170,5 +170,6 @@ form {
 }
 .submit-btn {
   margin: 10px 0 0 0;
+  text-align: center;
 }
 </style>

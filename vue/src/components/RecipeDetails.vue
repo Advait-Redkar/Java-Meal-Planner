@@ -4,8 +4,9 @@
     <div class="recipe-name">
       <h1>{{ recipe.recipeName }}</h1>
     </div>
+    <div class="details">
     <div>
-      <h2>Description</h2>
+      <h2 class="test">Description</h2>
       <h3>{{ recipe.description }}</h3>
     </div>
     <div>
@@ -24,6 +25,7 @@
         </li>
         </h3>
       </ul>
+    </div>
     </div>
     <router-link
       v-bind:to="{ name: 'editRecipe', params: { recipeId: recipe.recipeId } }"
@@ -59,9 +61,11 @@ export default {
   margin: 0 auto 0 auto;
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: bold;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 .edit-button{
-    display:inline-block;
+display:inline-block;
 padding:0.5em 3em;
 border:0.16em solid #F38630;
 margin:0 0.3em 0.3em 0;
@@ -99,14 +103,50 @@ background-color: whitesmoke;
 
 }*/
 .recipe-name{
-  /* text-decoration: underline; */
   /* display: flex; */
   color: #994000;
-  align-self: center;
+  /* align-self: center; */
+  text-align: center;
+}
+
+.details{
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  padding-left: 10%;
+  padding-right:10%;
+
 
 }
 
+@media only screen and (max-width: 1000px){
+.main-div{
+  display: flex;
+  flex-direction: column;
+  border: none;
+  background-color: #ffbf80;
+  justify-content: center; 
+  width: 25%;
+  margin: 0 auto 0 auto;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+}
 
-/*can use align-items:flex-start if want description to float left*/
+/*Added:
+1. text-align: center to .recipe-name (in)
+2. added .details to center middle info in recipe details
+3. took off list-btn-div class of grocery items and displayed them as h2s in a div
+rather than lis in a ul
+4. added text-align: center; to submit-btn to center the add buttons
+5.edited how mealplan list dispalys so are h2s and p instead of ul and li
+6.media-query
+7.added margin on logout button
+
+
+
+*/
 </style>
 

@@ -143,9 +143,9 @@ export default {
   border-radius: 10px;
 
 }
-.main-div{
+/*.main-div{
   width: 30%;
-}
+}*/
 .button-div{
   margin: 10px auto 0 auto;
   

@@ -4,14 +4,14 @@
       <div class="recipe-name">
         <h1>Grocery List</h1>
       </div>
-      <ul
+      <div
         v-for="ingredient in ingredients"
         v-bind:key="ingredient.ingredientId"
       >
-        <li class="list-btn-div">
-          {{ ingredient.ingredientName }}
-        </li>
-      </ul>
+        <div>
+          <h2>{{ ingredient.ingredientName }}</h2>
+        </div>
+      </div>
     </div>
   </div>
 </template>
